@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PixenzeBooth - Amelia</title>
+  <style>
+    /* ==================== GLOBAL STYLES ==================== */
+    :root {
+      --bg-color: #72d6c9;      /* Warna tosca/mint sesuai desain */
+      --card-bg: #52c2b3;       /* Warna kartu tema */
+      --btn-bg: #2a9d8f;        /* Warna tombol utama */
+      --btn-hover: #218377;
+      --text-color: #ffffff;
+      --dark-text: #1d3557;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow-x: hidden;
+    }
+
+    /* Container untuk mengontrol slide */
+    .app-container {
+      width: 100%;
+      max-width: 480px;
+      min-height: 100vh;
+      position: relative;
+      background-color: var(--bg-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    /* Pengaturan Slide */
+    .slide {
+      display: none; /* Sembunyikan semua slide secara default */
+      width: 100%;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      animation: fadeIn 0.4s ease-in-out;
+    }
+
+    .slide.active {
+      display: flex; /* Tampilkan slide yang aktif */
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ==================== SLIDE 1: OPENING ==================== */
+    .slide-1 h1 {
+      font-size: 2.2rem;
+      font-weight: 900;
+      margin-bottom: 30px;
+      letter-spacing: 2px;
+      color: #ffffff;
+      text-shadow: 2px 2px 0px rgba(0,0,0,0.15);
+    }
+
+    .btn-start {
+      background-color: #ffffff;
+      color: var(--dark-text);
+      border: none;
+      padding: 15px 40px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      transition: all 0.2s;
+    }
+
+    .btn-start:hover {
+      transform: scale(1.05);
+      background-color: #f0f0f0;
+    }
+
+    /* ==================== SLIDE 2: CHOOSE TEMPLATE ==================== */
+    .slide-2 h2 {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 25px;
+      letter-spacing: 1.5px;
+    }
+
+    .template-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      width: 100%;
+      max-width: 300px;
+    }
+
+    .template-card {
+      background-color: var(--card-bg);
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      padding: 18px;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #ffffff;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+
+    .template-card:hover {
+      background-color: #41b3a3;
+      transform: translateY(-2px);
+      border-color: #ffffff;
+    }
+
+    /* ==================== SLIDE 3: PHOTOBOOTH ==================== */
+    .slide-3 {
+      justify-content: flex-start;
+      padding-top: 20px;
+    }
+
+    /* Frame Strip Foto */
+    .photostrip-frame {
+      background-color: #ffffff;
+      padding: 15px 15px 25px 15px;
+      border-radius: 8px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      width: 260px;
+      transition: background-color 0.3s;
+    }
+
+    /* Tampilan Kamera Live & Slot Foto Hasil */
+    .photo-slot {
+      width: 230px;
+      height: 160px;
+      background-color: #e0e0e0;
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    video#webcam {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scaleX(-1); /* Cermin live feed agar natural */
+    }
+
+    .photo-slot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Overlay Countdown Timer */
+    .timer-overlay {
+      position: absolute;
+      font-size: 3.5rem;
+      font-weight: bold;
+      color: #ffffff;
+      text-shadow: 0 0 10px rgba(0,0,0,0.7);
+      display: none;
+    }
+
+    /* Brand Logo di Bawah Strip Foto */
+    .brand-tag {
+      color: var(--dark-text);
+      font-weight: 800;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      margin-top: 5px;
+      text-transform: uppercase;
+    }
+
+    /* Panel Tombol Aksi */
+    .controls {
+      margin-top: 20px;
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+
+    .btn-icon {
+      background-color: #ffffff;
+      color: var(--dark-text);
+      border: none;
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      transition: all 0.2s;
+    }
+
+    .btn-icon:hover {
+      transform: scale(1.1);
+    }
+
+    .btn-icon svg {
+      width: 26px;
+      height: 26px;
+      fill: currentColor;
+    }
+
+    .btn-back {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    /* Canvas tersembunyi untuk proses unduh */
+    #hiddenCanvas {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+
+    <!-- ==================== SLIDE 1: OPENING ==================== -->
+    <div id="slide1" class="slide slide-1 active">
+      <h1>READY<br>AMELIA?</h1>
+      <button class="btn-start" onclick="goToSlide(2)">START</button>
+    </div>
+
+    <!-- ==================== SLIDE 2: CHOOSE TEMPLATE ==================== -->
+    <div id="slide2" class="slide slide-2">
+      <button class="btn-back" onclick="goToSlide(1)">← Back</button>
+      <h2>CHOOSE</h2>
+      <div class="template-grid">
+        <button class="template-card" onclick="selectTemplate('TOY STORY', '#ffffff', '#1d3557')">TOY STORY</button>
+        <button class="template-card" onclick="selectTemplate('ABOUT YOU', '#ffe5ec', '#ffb703')">ABOUT YOU</button>
+        <button class="template-card" onclick="selectTemplate('KING BARCA', '#004d98', '#a50044')">KING BARCA</button>
+        <button class="template-card" onclick="selectTemplate('GAK TAU', '#222222', '#ffffff')">GAK TAU</button>
+      </div>
+    </div>
+
+    <!-- ==================== SLIDE 3: PHOTOBOOTH ==================== -->
+    <div id="slide3" class="slide slide-3">
+      <button class="btn-back" onclick="resetPhotobooth()">← Change Template</button>
+      
+      <!-- Frame Strip Foto -->
+      <div class="photostrip-frame" id="stripFrame">
+        <!-- Kamera Live Feed / Slot 1 -->
+        <div class="photo-slot">
+          <video id="webcam" autoplay playsinline></video>
+          <img id="img1" style="display:none;" />
+          <div id="timerDisplay" class="timer-overlay"></div>
+        </div>
+        
+        <!-- Slot Foto Hasil 2 -->
+        <div class="photo-slot">
+          <img id="img2" style="display:none;" />
+        </div>
+
+        <!-- Slot Foto Hasil 3 -->
+        <div class="photo-slot">
+          <img id="img3" style="display:none;" />
+        </div>
+
+        <!-- Logo Brand -->
+        <div class="brand-tag" id="brandTag">PIXENZE BOOTH</div>
+      </div>
+
+      <!-- Tombol Aksi Kamera & Download -->
+      <div class="controls">
+        <!-- Tombol Shutter Kamera -->
+        <button class="btn-icon" id="btnShutter" onclick="startPhotoSequence()" title="Ambil Foto">
+          <svg viewBox="0 0 24 24"><path d="M4 4h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm8 3a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/></svg>
+        </button>
+
+        <!-- Tombol Unduh / Download -->
+        <button class="btn-icon" id="btnDownload" onclick="downloadStrip()" style="display:none;" title="Download Strip Foto">
+          <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Canvas Tersembunyi untuk Render Gambar Download -->
+  <canvas id="hiddenCanvas"></canvas>
+
+  <!-- ==================== JAVASCRIPT LOGIC ==================== -->
+  <script>
+    // Variable State
+    let currentTheme = { name: '', bg: '#ffffff', text: '#1d3557' };
+    let capturedPhotos = [];
+    let mediaStream = null;
+
+    // DOM Elements
+    const webcam = document.getElementById('webcam');
+    const timerDisplay = document.getElementById('timerDisplay');
+    const btnShutter = document.getElementById('btnShutter');
+    const btnDownload = document.getElementById('btnDownload');
+    const stripFrame = document.getElementById('stripFrame');
+    const brandTag = document.getElementById('brandTag');
+
+    // Navigation Fungsi Perpindahan Slide
+    function goToSlide(slideNumber) {
+      document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+      document.getElementById(`slide${slideNumber}`).classList.add('active');
+
+      if (slideNumber === 3) {
+        startWebcam();
+      } else {
+        stopWebcam();
+      }
+    }
+
+    // Memilih Tema dari Slide 2
+    function selectTemplate(name, bgColor, textColor) {
+      currentTheme = { name, bg: bgColor, text: textColor };
+      
+      // Terapkan tema pada frame photo strip
+      stripFrame.style.backgroundColor = bgColor;
+      brandTag.style.color = textColor;
+
+      goToSlide(3);
+    }
+
+    // Menyalakan Kamera Webcam
+    async function startWebcam() {
+      try {
+        mediaStream = await navigator.mediaDevices.getUserMedia({ 
+          video: { width: 1280, height: 720, facingMode: "user" }, 
+          audio: false 
+        });
+        webcam.srcObject = mediaStream;
+        webcam.style.display = 'block';
+      } catch (err) {
+        alert("Akses kamera ditolak atau tidak tersedia. Pastikan izin kamera aktif!");
+        console.error(err);
+      }
+    }
+
+    // Mematikan Kamera Webcam
+    function stopWebcam() {
+      if (mediaStream) {
+        mediaStream.getTracks().forEach(track => track.stop());
+        mediaStream = null;
+      }
+    }
+
+    // Reset Photobooth jika ingin ganti template
+    function resetPhotobooth() {
+      capturedPhotos = [];
+      btnShutter.style.display = 'flex';
+      btnDownload.style.display = 'none';
+      webcam.style.display = 'block';
+
+      for (let i = 1; i <= 3; i++) {
+        const img = document.getElementById(`img${i}`);
+        img.src = '';
+        img.style.display = 'none';
+      }
+
+      goToSlide(2);
+    }
+
+    // Proses Pengambilan Sequence 3 Foto dengan Countdown Timer
+    async function startPhotoSequence() {
+      capturedPhotos = [];
+      btnShutter.style.display = 'none';
+
+      for (let i = 1; i <= 3; i++) {
+        await runCountdown(3);
+        captureSlot(i);
+        await new Promise(r => setTimeout(r, 600)); // jeda sebentar antar foto
+      }
+
+      // Selesai Ambil 3 Foto
+      webcam.style.display = 'none';
+      btnDownload.style.display = 'flex';
+    }
+
+    // Fungsi Timer Mundur
+    function runCountdown(seconds) {
+      return new Promise((resolve) => {
+        let count = seconds;
+        timerDisplay.style.display = 'block';
+        timerDisplay.innerText = count;
+
+        const interval = setInterval(() => {
+          count--;
+          if (count > 0) {
+            timerDisplay.innerText = count;
+          } else {
+            clearInterval(interval);
+            timerDisplay.style.display = 'none';
+            resolve();
+          }
+        }, 1000);
+      });
+    }
+
+    // Tangkap Gambar dari Live Video ke Image Element
+    function captureSlot(slotIndex) {
+      const canvas = document.createElement('canvas');
+      canvas.width = webcam.videoWidth || 640;
+      canvas.height = webcam.videoHeight || 480;
+      const ctx = canvas.getContext('2d');
+
+      // Efek cermin agar sesuai tampilan video live
+      ctx.translate(canvas.width, 0);
+      ctx.scale(-1, 1);
+      ctx.drawImage(webcam, 0, 0, canvas.width, canvas.height);
+
+      const dataUrl = canvas.toDataURL('image/png');
+      capturedPhotos.push(dataUrl);
+
+      const imgElement = document.getElementById(`img${slotIndex}`);
+      imgElement.src = dataUrl;
+      imgElement.style.display = 'block';
+    }
+
+    // Menggabungkan 3 Foto + Frame menjadi 1 Gambar PNG Siap Download
+    function downloadStrip() {
+      const canvas = document.getElementById('hiddenCanvas');
+      const ctx = canvas.getContext('2d');
+
+      // Ukuran Canvas Hasil Akhir
+      const frameWidth = 400;
+      const photoWidth = 350;
+      const photoHeight = 240;
+      const margin = 25;
+      const headerGap = 25;
+      const footerGap = 70;
+
+      const frameHeight = headerGap + (photoHeight * 3) + (margin * 2) + footerGap;
+
+      canvas.width = frameWidth;
+      canvas.height = frameHeight;
+
+      // Draw Background Frame Warna Tema
+      ctx.fillStyle = currentTheme.bg;
+      ctx.fillRect(0, 0, frameWidth, frameHeight);
+
+      // Render 3 Foto
+      let loadedImages = 0;
+      capturedPhotos.forEach((src, idx) => {
+        const img = new Image();
+        img.onload = () => {
+          const x = (frameWidth - photoWidth) / 2;
+          const y = headerGap + idx * (photoHeight + margin);
+
+          ctx.drawImage(img, x, y, photoWidth, photoHeight);
+          loadedImages++;
+
+          // Jika semua foto telah digambar pada canvas
+          if (loadedImages === 3) {
+            // Draw Teks Branding
+            ctx.fillStyle = currentTheme.text;
+            ctx.font = 'bold 22px sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('PIXENZE BOOTH', frameWidth / 2, frameHeight - 25);
+
+            // Trigger Download File PNG
+            const link = document.createElement('a');
+            link.download = `PixenzeBooth-${currentTheme.name}-${Date.now()}.png`;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+          }
+        };
+        img.src = src;
+      });
+    }
+  </script>
+</body>
+</html>
