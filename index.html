@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pixella Digital Photobooth</title>
-    <!-- Tailwind CSS untuk Styling Cepat & Responsive -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -14,43 +13,36 @@
 </head>
 <body class="min-h-screen flex flex-col items-center justify-center p-4 text-gray-800">
 
-    <!-- CONTAINER UTAMA APLIKASI -->
     <div id="app" class="w-full max-w-md bg-white rounded-3xl shadow-2xl overflow-hidden border-4 border-pink-200 relative min-h-[650px] flex flex-col">
 
-        <!-- ================= PAGE 1: LANDING PAGE ================= -->
+        <!-- LANDING PAGE -->
         <div id="page-landing" class="flex flex-col items-center justify-between p-6 h-full flex-grow text-center">
             <div class="mt-8">
-                <span class="bg-pink-100 text-pink-600 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">✨ Special Edition</span>
-                <h1 class="font-heading text-4xl text-pink-600 mt-4 drop-shadow-sm">READY AMELIA?</h1>
-                <p class="text-sm text-gray-500 mt-2">Capture your best moments, choose your favorite template, and let the magic happen!</p>
+                <span class="bg-pink-100 text-pink-600 text-xs font-bold px-3 py-1 rounded-full uppercase">✨ Special Edition</span>
+                <h1 class="font-heading text-4xl text-pink-600 mt-4">READY AMELIA?[span_3](start_span)[span_3](end_span)</h1>
+                <p class="text-sm text-gray-500 mt-2">Capture your best moments, choose your template, and let's go!</p>
             </div>
-            
             <div class="my-6 relative w-full flex justify-center">
-                <div class="w-64 h-64 bg-pink-50 rounded-2xl border-4 border-dashed border-pink-300 flex items-center justify-center relative overflow-hidden shadow-inner">
+                <div class="w-64 h-64 bg-pink-50 rounded-2xl border-4 border-dashed border-pink-300 flex items-center justify-center">
                     <span class="text-6xl animate-bounce">📸</span>
                 </div>
             </div>
-
-            <button onclick="goToPage('page-templates')" class="w-full py-4 bg-pink-500 hover:bg-pink-600 text-white font-heading text-xl rounded-full shadow-lg transform transition active:scale-95 mb-4">
-                START 🚀
+            <button onclick="goToPage('page-templates')" class="w-full py-4 bg-pink-500 hover:bg-pink-600 text-white font-heading text-xl rounded-full shadow-lg mb-4">
+                START[span_4](start_span)[span_4](end_span)
             </button>
         </div>
 
-        <!-- ================= PAGE 2: TEMPLATE SELECTION ================= -->
+        <!-- TEMPLATE SELECTION -->
         <div id="page-templates" class="hidden flex flex-col p-6 h-full flex-grow">
             <div class="flex items-center justify-between mb-4">
                 <button onclick="goToPage('page-landing')" class="text-pink-500 font-bold text-sm">← Back</button>
-                <h2 class="font-heading text-2xl text-pink-600">CHOOSE TEMPLATE</h2>
+                <h2 class="font-heading text-2xl text-pink-600">CHOOSE TEMPLATE[span_5](start_span)[span_5](end_span)</h2>
                 <div class="w-8"></div>
             </div>
-            <p class="text-xs text-gray-500 text-center mb-4">Pilih salah satu dari 5 template spesial di bawah ini[span_7](start_span)[span_7](end_span):</p>
-            
-            <div class="grid grid-cols-2 gap-3 overflow-y-auto max-h-[420px] pr-1 pb-4" id="template-grid">
-                <!-- Template Cards akan dirender otomatis via JavaScript -->
-            </div>
+            <div class="grid grid-cols-2 gap-3 overflow-y-auto max-h-[420px] pr-1 pb-4" id="template-grid"></div>
         </div>
 
-        <!-- ================= PAGE 3: PHOTOBOOTH ================= -->
+        <!-- PHOTOBOOTH -->
         <div id="page-booth" class="hidden flex flex-col p-4 h-full flex-grow justify-between">
             <div class="flex justify-between items-center mb-2">
                 <button onclick="confirmChangeTemplate()" class="text-xs bg-gray-100 px-3 py-1.5 rounded-full font-semibold text-gray-600">Change Template</button>
@@ -58,31 +50,25 @@
                 <button onclick="toggleCameraFacing()" class="text-xs bg-gray-100 px-3 py-1.5 rounded-full font-semibold text-gray-600">🔄 Flip</button>
             </div>
 
-            <!-- Camera Preview & Live Template Overlay Container -->
             <div class="relative w-full aspect-[3/4] bg-black rounded-2xl overflow-hidden shadow-md flex items-center justify-center">
                 <video id="webcam" autoplay playsinline muted class="w-full h-full object-cover transform -scale-x-100"></video>
-                <!-- Countdown Overlay -->
-                <div id="countdown-overlay" class="absolute inset-0 bg-black/40 backdrop-blur-xs flex items-center justify-center text-white font-heading text-7xl hidden">3</div>
+                <div id="countdown-overlay" class="absolute inset-0 bg-black/40 flex items-center justify-center text-white font-heading text-7xl hidden">3</div>
             </div>
 
-            <!-- Mini Preview Slot Terisi -->
-            <div class="flex gap-2 overflow-x-auto py-2" id="slot-thumbnails">
-                <!-- Thumbnail slot terisi muncul di sini -->
-            </div>
+            <div class="flex gap-2 overflow-x-auto py-2" id="slot-thumbnails"></div>
 
-            <!-- Controls (Capture & Upload) -->
             <div class="grid grid-cols-2 gap-3 mt-2">
                 <label class="flex items-center justify-center py-3 bg-white border-2 border-pink-300 text-pink-600 font-bold text-sm rounded-2xl shadow-sm cursor-pointer hover:bg-pink-50">
-                    📂 Upload Photo
+                    📂 Upload Photo[span_6](start_span)[span_6](end_span)
                     <input type="file" accept="image/*" class="hidden" onchange="handleFileUpload(event)">
                 </label>
                 <button onclick="startCountdown()" class="py-3 bg-pink-500 hover:bg-pink-600 text-white font-bold text-sm rounded-2xl shadow-md flex items-center justify-center gap-1">
-                    📸 Capture
+                    📸 Capture[span_7](start_span)[span_7](end_span)
                 </button>
             </div>
         </div>
 
-        <!-- ================= PAGE 4: RESULT PAGE ================= -->
+        <!-- RESULT PAGE -->
         <div id="page-result" class="hidden flex flex-col p-6 h-full flex-grow items-center justify-between text-center overflow-y-auto">
             <div>
                 <h2 class="font-heading text-3xl text-pink-600 mb-1">MISSION COMPLETE[span_8](start_span)[span_8](end_span)!</h2>
@@ -90,23 +76,237 @@
             </div>
 
             <div class="w-64 bg-white p-2 rounded-2xl shadow-lg border-2 border-pink-200 my-2">
-                <img id="final-result-img" class="w-full rounded-xl object-contain" alt="Final Photobooth Result">
+                <img id="final-result-img" class="w-full rounded-xl object-contain" alt="Final Result">
             </div>
 
             <div class="flex flex-col gap-2.5 w-full mt-4">
+                <!-- Tombol Download Langsung untuk User -->
                 <a id="download-btn" download="photobooth-result.png" class="w-full">
-                    <button class="w-full py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-full shadow-md">💾 Save to Disk / Download</button>
+                    <button class="w-full py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-full shadow-md">💾 SAVE TO DISK / DOWNLOAD[span_9](start_span)[span_9](end_span)</button>
                 </a>
-                <button onclick="restartSession()" class="w-full py-3 bg-pink-100 hover:bg-pink-200 text-pink-600 font-bold rounded-full">🔄 Replay Mission (Start Again)</button>
+                <button onclick="restartSession()" class="w-full py-3 bg-pink-100 hover:bg-pink-200 text-pink-600 font-bold rounded-full">🔄 REPLAY MISSION[span_10](start_span)[span_10](end_span)</button>
             </div>
         </div>
 
     </div>
 
-    <!-- Hidden Canvas untuk Image Processing & Compositing -->
     <canvas id="compositing-canvas" width="1200" height="1800" class="hidden"></canvas>
 
     <script>
+        const TEMPLATES = [
+            { id: "template-01", name: "Toy Story", asset: "template-1.png", totalSlots: 4, slots: [[100, 150, 480, 750], [620, 150, 480, 750], [100, 920, 480, 750], [620, 920, 480, 750]] },
+            { id: "template-02", name: "About You", asset: "template-2.png", totalSlots: 3, slots: [[150, 100, 900, 450], [150, 600, 900, 450], [150, 1100, 900, 450]] },
+            { id: "template-03", name: "King Barca", asset: "template-3.png", totalSlots: 6, slots: [[100, 150, 480, 350], [620, 150, 480, 350], [100, 530, 480, 350], [620, 530, 480, 350], [100, 910, 480, 350], [620, 910, 480, 350]] },
+            { id: "template-04", name: "Gak Tau", asset: "template-4.png", totalSlots: 4, slots: [[100, 150, 480, 750], [620, 150, 480, 750], [100, 920, 480, 750], [620, 920, 480, 750]] },
+            { id: "template-05", name: "Special", asset: "template-5.png", totalSlots: 3, slots: [[150, 100, 900, 450], [150, 600, 900, 450], [150, 1100, 900, 450]] }
+        ];
+
+        let selectedTemplate = null;
+        let currentSlotIndex = 0;
+        let capturedPhotos = [];
+        let videoStream = null;
+        let useFrontCamera = true;
+        const sessionId = "PB-" + Date.now() + "-" + Math.random().toString(36).substring(2, 6).toUpperCase();
+        
+        // Masukkan URL Web App Google Apps Script kamu di sini untuk menghimpun ke GDrive
+        const GOOGLE_SCRIPT_URL = "MASUKKAN_URL_WEB_APP_APPS_SCRIPT_DISINI";
+
+        function goToPage(pageId) {
+            document.querySelectorAll('#app > div').forEach(div => div.classList.add('hidden'));
+            document.getElementById(pageId).classList.remove('hidden');
+            if (pageId === 'page-templates') renderTemplateList();
+            if (pageId === 'page-booth') initCamera();
+            else stopCamera();
+        }
+
+        function renderTemplateList() {
+            const grid = document.getElementById('template-grid');
+            grid.innerHTML = '';
+            TEMPLATES.forEach(tpl => {
+                const card = document.createElement('div');
+                card.className = "bg-pink-50 border-2 border-pink-200 rounded-2xl p-3 flex flex-col items-center cursor-pointer hover:border-pink-500 transition";
+                card.onclick = () => selectTemplate(tpl);
+                card.innerHTML = `
+                    <div class="w-full h-32 bg-white rounded-xl overflow-hidden flex items-center justify-center mb-2">
+                        <img src="${tpl.asset}" class="h-full object-contain" alt="${tpl.name}">
+                    </div>
+                    <span class="font-bold text-xs text-gray-700">${tpl.name}</span>
+                    <span class="text-[10px] text-pink-500 font-semibold">${tpl.totalSlots} Slots</span>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function selectTemplate(tpl) {
+            selectedTemplate = tpl;
+            currentSlotIndex = 0;
+            capturedPhotos = [];
+            goToPage('page-booth');
+        }
+
+        function confirmChangeTemplate() {
+            if (confirm("Changing the template will restart your current photo session.")) {
+                goToPage('page-templates');
+            }
+        }
+
+        async function initCamera() {
+            const video = document.getElementById('webcam');
+            try {
+                if (videoStream) videoStream.getTracks().forEach(t => t.stop());
+                videoStream = await navigator.mediaDevices.getUserMedia({
+                    video: { facingMode: useFrontCamera ? 'user' : 'environment', width: 1200, height: 1800 },
+                    audio: false
+                });
+                video.srcObject = videoStream;
+                updateBoothUI();
+            } catch (err) {
+                alert("Camera unavailable. You can upload photos instead.");
+            }
+        }
+
+        function toggleCameraFacing() {
+            useFrontCamera = !useFrontCamera;
+            initCamera();
+        }
+
+        function stopCamera() {
+            if (videoStream) {
+                videoStream.getTracks().forEach(t => t.stop());
+                videoStream = null;
+            }
+        }
+
+        function startCountdown() {
+            if (currentSlotIndex >= selectedTemplate.totalSlots) return;
+            const overlay = document.getElementById('countdown-overlay');
+            overlay.classList.remove('hidden');
+            let count = 3;
+            overlay.innerText = count;
+            let timer = setInterval(() => {
+                count--;
+                if (count > 0) overlay.innerText = count;
+                else {
+                    clearInterval(timer);
+                    overlay.classList.add('hidden');
+                    takeSnapshot();
+                }
+            }, 1000);
+        }
+
+        function takeSnapshot() {
+            const video = document.getElementById('webcam');
+            const tempCanvas = document.createElement('canvas');
+            tempCanvas.width = video.videoWidth || 1200;
+            tempCanvas.height = video.videoHeight || 1800;
+            const ctx = tempCanvas.getContext('2d');
+            if (useFrontCamera) {
+                ctx.translate(tempCanvas.width, 0);
+                ctx.scale(-1, 1);
+            }
+            ctx.drawImage(video, 0, 0, tempCanvas.width, tempCanvas.height);
+            storePhoto(tempCanvas.toDataURL('image/png'));
+        }
+
+        function handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (e) => storePhoto(e.target.result);
+            reader.readAsDataURL(file);
+        }
+
+        function storePhoto(dataUrl) {
+            if (currentSlotIndex < selectedTemplate.totalSlots) {
+                capturedPhotos[currentSlotIndex] = dataUrl;
+                currentSlotIndex++;
+                updateBoothUI();
+                if (currentSlotIndex >= selectedTemplate.totalSlots) generateFinalComposite();
+            }
+        }
+
+        function updateBoothUI() {
+            document.getElementById('progress-indicator').innerText = `Photo ${currentSlotIndex + 1} / ${selectedTemplate.totalSlots}`;
+            const thumbContainer = document.getElementById('slot-thumbnails');
+            thumbContainer.innerHTML = '';
+            for (let i = 0; i < selectedTemplate.totalSlots; i++) {
+                const thumb = document.createElement('div');
+                thumb.className = `w-12 h-16 rounded-lg border-2 overflow-hidden bg-gray-200 flex items-center justify-center text-xs font-bold ${i < currentSlotIndex ? 'border-pink-500' : 'border-dashed border-gray-400'}`;
+                if (capturedPhotos[i]) thumb.innerHTML = `<img src="${capturedPhotos[i]}" class="w-full h-full object-cover">`;
+                else thumb.innerText = `#${i+1}`;
+                thumbContainer.appendChild(thumb);
+            }
+        }
+
+        function generateFinalComposite() {
+            goToPage('page-result');
+            const canvas = document.getElementById('compositing-canvas');
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            let loadedPhotos = 0;
+            capturedPhotos.forEach((url, idx) => {
+                let img = new Image();
+                img.src = url;
+                img.onload = () => {
+                    let slot = selectedTemplate.slots[idx];
+                    ctx.drawImage(img, slot[0], slot[1], slot[2], slot[3]);
+                    loadedPhotos++;
+                    if (loadedPhotos === selectedTemplate.totalSlots) drawTemplateOverlayFinal(canvas);
+                };
+            });
+        }
+
+        function drawTemplateOverlayFinal(canvas) {
+            const ctx = canvas.getContext('2d');
+            const templateImg = new Image();
+            templateImg.src = selectedTemplate.asset;
+            templateImg.onload = () => {
+                ctx.drawImage(templateImg, 0, 0, canvas.width, canvas.height);
+                const finalDataUrl = canvas.toDataURL('image/png');
+                
+                // 1. User bisa langsung download hasil akhir secara instan
+                document.getElementById('final-result-img').src = finalDataUrl;
+                document.getElementById('download-btn').href = finalDataUrl;
+
+                // 2. Di waktu yang sama, sistem otomatis menghimpun foto mentah & jadi ke Google Drive
+                uploadToGoogleDrive(finalDataUrl, capturedPhotos);
+            };
+        }
+
+        function uploadToGoogleDrive(finalData, rawArray) {
+            const statusEl = document.getElementById('drive-status');
+            if (GOOGLE_SCRIPT_URL.includes("MASUKKAN_URL")) {
+                statusEl.innerText = "⚠️ Download siap! (Google Drive URL belum diisi)";
+                return;
+            }
+
+            statusEl.innerText = "📤 Menyimpan foto ke Google Drive...";
+
+            fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                body: JSON.stringify({ sessionId, type: 'final', base64: finalData, filename: `${sessionId}_final.png` })
+            }).then(() => {
+                rawArray.forEach((rawUrl, idx) => {
+                    fetch(GOOGLE_SCRIPT_URL, {
+                        method: 'POST',
+                        body: JSON.stringify({ sessionId, type: 'raw', base64: rawUrl, filename: `${sessionId}_photo_0${idx+1}.png` })
+                    });
+                });
+                statusEl.innerText = "✅ Download siap & otomatis tersimpan di Google Drive!";
+            }).catch(err => {
+                statusEl.innerText = "✅ Download siap! (Gagal koneksi cloud backup).";
+            });
+        }
+
+        function restartSession() {
+            selectedTemplate = null;
+            currentSlotIndex = 0;
+            capturedPhotos = [];
+            goToPage('page-landing');
+        }
+    </script>
+</body>
+</html>
         /* ================= 5 CUSTOM TEMPLATES CONFIGURATION ================= */
         // Sesuaikan URL asset template PNG transparan dan slot koordinat [x, y, width, height]
         const TEMPLATES = [
