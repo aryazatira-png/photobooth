@@ -3,110 +3,404 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Photobooth</title>
-    <!-- Tailwind CSS CDN untuk styling yang cepat, rapi, dan mudah dibaca -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Pixella Digital Photobooth</title>
+    <!-- Tailwind CSS untuk Styling Cepat & Responsive -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap');
-        body { font-family: 'Poppins', sans-serif; }
+        body { font-family: 'Poppins', sans-serif; background-color: #fff0f5; }
+        .font-heading { font-family: 'Anton', sans-serif; letter-spacing: 1px; }
     </style>
 </head>
-<body class="bg-pink-50 min-h-screen flex items-center justify-center p-4">
+<body class="min-h-screen flex flex-col items-center justify-center p-4 text-gray-800">
 
-    <!-- CONTAINER UTAMA -->
-    <div id="app" class="w-full max-w-md bg-white rounded-3xl shadow-xl overflow-hidden p-6 text-center border-4 border-pink-200">
-        
-        <!-- 1. LANDING PAGE -->
-        <div id="page-landing" class="space-y-6 py-8">
-            <div class="inline-block bg-pink-100 text-pink-600 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
-                ✨ Digital Photobooth
+    <!-- CONTAINER UTAMA APLIKASI -->
+    <div id="app" class="w-full max-w-md bg-white rounded-3xl shadow-2xl overflow-hidden border-4 border-pink-200 relative min-h-[650px] flex flex-col">
+
+        <!-- ================= PAGE 1: LANDING PAGE ================= -->
+        <div id="page-landing" class="flex flex-col items-center justify-between p-6 h-full flex-grow text-center">
+            <div class="mt-8">
+                <span class="bg-pink-100 text-pink-600 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">✨ Special Edition</span>
+                <h1 class="font-heading text-4xl text-pink-600 mt-4 drop-shadow-sm">READY AMELIA?</h1>
+                <p class="text-sm text-gray-500 mt-2">Capture your best moments, choose your favorite template, and let the magic happen!</p>
             </div>
-            <h1 class="text-4xl font-extrabold text-gray-800 leading-tight">
-                READY <br><span class="text-pink-500">AMELIA?</span>
-            </h1>
-            <p class="text-gray-500 text-sm px-4">
-                Smile, snap, and share! Buat kenangan seru kamu dengan template pilihan dalam hitungan detik.
-            </p>
-            <button onclick="goToTemplate()" class="w-full bg-pink-500 hover:bg-pink-600 text-white font-bold py-4 rounded-full shadow-lg transition transform active:scale-95 text-lg">
-                START 📸
+            
+            <div class="my-6 relative w-full flex justify-center">
+                <div class="w-64 h-64 bg-pink-50 rounded-2xl border-4 border-dashed border-pink-300 flex items-center justify-center relative overflow-hidden shadow-inner">
+                    <span class="text-6xl animate-bounce">📸</span>
+                </div>
+            </div>
+
+            <button onclick="goToPage('page-templates')" class="w-full py-4 bg-pink-500 hover:bg-pink-600 text-white font-heading text-xl rounded-full shadow-lg transform transition active:scale-95 mb-4">
+                START 🚀
             </button>
         </div>
 
-        <!-- 2. TEMPLATE SELECTION PAGE -->
-        <div id="page-template" class="hidden space-y-4 py-4">
-            <h2 class="text-2xl font-bold text-gray-800">CHOOSE TEMPLATE</h2>
-            <p class="text-xs text-gray-500 mb-4">Pilih salah satu dari 5 template custom kesukaanmu:</p>
-            
-            <div class="grid grid-cols-2 gap-3">
-                <div onclick="selectTemplate('Template 1')" class="bg-pink-50 border-2 border-pink-200 p-4 rounded-2xl cursor-pointer hover:bg-pink-100 transition font-bold text-pink-700 text-sm">
-                    🎨 Toy Story
-                </div>
-                <div onclick="selectTemplate('Template 2')" class="bg-pink-50 border-2 border-pink-200 p-4 rounded-2xl cursor-pointer hover:bg-pink-100 transition font-bold text-pink-700 text-sm">
-                    💖 About You
-                </div>
-                <div onclick="selectTemplate('Template 3')" class="bg-pink-50 border-2 border-pink-200 p-4 rounded-2xl cursor-pointer hover:bg-pink-100 transition font-bold text-pink-700 text-sm">
-                    ⚽ King Barca
-                </div>
-                <div onclick="selectTemplate('Template 4')" class="bg-pink-50 border-2 border-pink-200 p-4 rounded-2xl cursor-pointer hover:bg-pink-100 transition font-bold text-pink-700 text-sm">
-                    ✨ Strip Retro
-                </div>
+        <!-- ================= PAGE 2: TEMPLATE SELECTION ================= -->
+        <div id="page-templates" class="hidden flex flex-col p-6 h-full flex-grow">
+            <div class="flex items-center justify-between mb-4">
+                <button onclick="goToPage('page-landing')" class="text-pink-500 font-bold text-sm">← Back</button>
+                <h2 class="font-heading text-2xl text-pink-600">CHOOSE TEMPLATE</h2>
+                <div class="w-8"></div>
             </div>
-            <div onclick="selectTemplate('Template 5')" class="bg-pink-50 border-2 border-pink-200 p-3 rounded-2xl cursor-pointer hover:bg-pink-100 transition font-bold text-pink-700 text-sm mt-2">
-                🌟 Single Cute Frame
+            <p class="text-xs text-gray-500 text-center mb-4">Pilih salah satu dari 5 template spesial di bawah ini[span_7](start_span)[span_7](end_span):</p>
+            
+            <div class="grid grid-cols-2 gap-3 overflow-y-auto max-h-[420px] pr-1 pb-4" id="template-grid">
+                <!-- Template Cards akan dirender otomatis via JavaScript -->
             </div>
         </div>
 
-        <!-- 3. PHOTOBOOTH PAGE -->
-        <div id="page-booth" class="hidden space-y-4">
-            <div class="flex justify-between items-center text-xs font-bold text-gray-500">
-                <span id="selected-template-name" class="text-pink-600">Template</span>
-                <span id="photo-counter" class="bg-pink-100 px-2.5 py-1 rounded-full text-pink-600">Foto 1 / 3</span>
+        <!-- ================= PAGE 3: PHOTOBOOTH ================= -->
+        <div id="page-booth" class="hidden flex flex-col p-4 h-full flex-grow justify-between">
+            <div class="flex justify-between items-center mb-2">
+                <button onclick="confirmChangeTemplate()" class="text-xs bg-gray-100 px-3 py-1.5 rounded-full font-semibold text-gray-600">Change Template</button>
+                <span id="progress-indicator" class="text-xs font-bold bg-pink-100 text-pink-600 px-3 py-1.5 rounded-full">Photo 1 / 4</span>
+                <button onclick="toggleCameraFacing()" class="text-xs bg-gray-100 px-3 py-1.5 rounded-full font-semibold text-gray-600">🔄 Flip</button>
             </div>
 
-            <!-- Preview Kamera -->
-            <div class="relative w-full h-72 bg-gray-900 rounded-2xl overflow-hidden shadow-inner flex items-center justify-center">
-                <video id="camera-preview" autoplay playsinline class="w-full h-full object-cover"></video>
-                <div id="countdown-display" class="absolute inset-0 bg-black/50 text-white text-6xl font-black flex items-center justify-center hidden">3</div>
+            <!-- Camera Preview & Live Template Overlay Container -->
+            <div class="relative w-full aspect-[3/4] bg-black rounded-2xl overflow-hidden shadow-md flex items-center justify-center">
+                <video id="webcam" autoplay playsinline muted class="w-full h-full object-cover transform -scale-x-100"></video>
+                <!-- Countdown Overlay -->
+                <div id="countdown-overlay" class="absolute inset-0 bg-black/40 backdrop-blur-xs flex items-center justify-center text-white font-heading text-7xl hidden">3</div>
             </div>
 
-            <!-- Tombol Aksi Kamera & Upload -->
-            <div class="flex gap-2">
-                <label class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-3 rounded-full font-bold text-sm cursor-pointer flex items-center justify-center gap-1 transition">
-                    📁 Upload
-                    <input type="file" accept="image/*" class="hidden" onchange="handleUpload(event)">
+            <!-- Mini Preview Slot Terisi -->
+            <div class="flex gap-2 overflow-x-auto py-2" id="slot-thumbnails">
+                <!-- Thumbnail slot terisi muncul di sini -->
+            </div>
+
+            <!-- Controls (Capture & Upload) -->
+            <div class="grid grid-cols-2 gap-3 mt-2">
+                <label class="flex items-center justify-center py-3 bg-white border-2 border-pink-300 text-pink-600 font-bold text-sm rounded-2xl shadow-sm cursor-pointer hover:bg-pink-50">
+                    📂 Upload Photo
+                    <input type="file" accept="image/*" class="hidden" onchange="handleFileUpload(event)">
                 </label>
-                <button onclick="startCountdown()" class="flex-1 bg-pink-500 hover:bg-pink-600 text-white py-3 rounded-full font-bold text-sm shadow-md transition">
+                <button onclick="startCountdown()" class="py-3 bg-pink-500 hover:bg-pink-600 text-white font-bold text-sm rounded-2xl shadow-md flex items-center justify-center gap-1">
                     📸 Capture
                 </button>
             </div>
         </div>
 
-        <!-- 4. RESULT PAGE -->
-        <div id="page-result" class="hidden space-y-4">
-            <h2 class="text-2xl font-extrabold text-gray-800">YOUR PHOTO IS READY! 🎉</h2>
-            
-            <div class="bg-gray-100 rounded-2xl overflow-hidden p-2 border border-gray-200">
-                <canvas id="result-canvas" class="w-full h-auto rounded-xl"></canvas>
+        <!-- ================= PAGE 4: RESULT PAGE ================= -->
+        <div id="page-result" class="hidden flex flex-col p-6 h-full flex-grow items-center justify-between text-center overflow-y-auto">
+            <div>
+                <h2 class="font-heading text-3xl text-pink-600 mb-1">MISSION COMPLETE[span_8](start_span)[span_8](end_span)!</h2>
+                <p id="drive-status" class="text-xs text-amber-600 font-semibold mb-3">⏳ Menyimpan otomatis ke Google Drive...</p>
             </div>
 
-            <div class="space-y-2">
-                <button onclick="downloadPhoto()" class="w-full bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 rounded-full shadow-md transition text-sm">
-                    💾 Download Photo
-                </button>
-                <button onclick="resetApp()" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-2.5 rounded-full transition text-sm">
-                    🔄 Start Again
-                </button>
+            <div class="w-64 bg-white p-2 rounded-2xl shadow-lg border-2 border-pink-200 my-2">
+                <img id="final-result-img" class="w-full rounded-xl object-contain" alt="Final Photobooth Result">
+            </div>
+
+            <div class="flex flex-col gap-2.5 w-full mt-4">
+                <a id="download-btn" download="photobooth-result.png" class="w-full">
+                    <button class="w-full py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-full shadow-md">💾 Save to Disk / Download</button>
+                </a>
+                <button onclick="restartSession()" class="w-full py-3 bg-pink-100 hover:bg-pink-200 text-pink-600 font-bold rounded-full">🔄 Replay Mission (Start Again)</button>
             </div>
         </div>
 
     </div>
 
-    <!-- JAVASCRIPT SEDERHANA -->
+    <!-- Hidden Canvas untuk Image Processing & Compositing -->
+    <canvas id="compositing-canvas" width="1200" height="1800" class="hidden"></canvas>
+
     <script>
-        let currentStep = 'landing';
-        let chosenTemplate = '';
-        let photoCount = 0;
-        const maxPhotos = 3;
+        /* ================= 5 CUSTOM TEMPLATES CONFIGURATION ================= */
+        // Sesuaikan URL asset template PNG transparan dan slot koordinat [x, y, width, height]
+        const TEMPLATES = [
+            {
+                id: "template-01",
+                name: "Toy Story Vibe",
+                asset: "template-1.png", 
+                totalSlots: 4,
+                slots: [
+                    [100, 150, 480, 750],
+                    [620, 150, 480, 750],
+                    [100, 920, 480, 750],
+                    [620, 920, 480, 750]
+                ]
+            },
+            {
+                id: "template-02",
+                name: "About You",
+                asset: "template-2.png",
+                totalSlots: 3,
+                slots: [
+                    [150, 100, 900, 450],
+                    [150, 600, 900, 450],
+                    [150, 1100, 900, 450]
+                ]
+            },
+            {
+                id: "template-03",
+                name: "King Barca",
+                asset: "template-3.png",
+                totalSlots: 6,
+                slots: [
+                    [100, 150, 480, 350], [620, 150, 480, 350],
+                    [100, 530, 480, 350], [620, 530, 480, 350],
+                    [100, 910, 480, 350], [620, 910, 480, 350]
+                ]
+            },
+            {
+                id: "template-04",
+                name: "Gak Tau",
+                asset: "template-4.png",
+                totalSlots: 4,
+                slots: [
+                    [100, 150, 480, 750], [620, 150, 480, 750],
+                    [100, 920, 480, 750], [620, 920, 480, 750]
+                ]
+            },
+            {
+                id: "template-05",
+                name: "Special Edition",
+                asset: "template-5.png",
+                totalSlots: 3,
+                slots: [
+                    [150, 100, 900, 450],
+                    [150, 600, 900, 450],
+                    [150, 1100, 900, 450]
+                ]
+            }
+        ];
+
+        let selectedTemplate = null;
+        let currentSlotIndex = 0;
+        let capturedPhotos = [];
+        let videoStream = null;
+        let useFrontCamera = true;
+        const sessionId = "PB-" + Date.now() + "-" + Math.random().toString(36).substring(2, 6).toUpperCase();
+
+        // Ganti dengan URL Google Apps Script Web App kamu untuk penyimpanan ke Google Drive
+        const GOOGLE_SCRIPT_URL = "MASUKKAN_URL_WEB_APP_APPS_SCRIPT_DISINI";
+
+        /* ================= NAVIGATION SYSTEM ================= */
+        function goToPage(pageId) {
+            document.querySelectorAll('#app > div').forEach(div => div.classList.add('hidden'));
+            document.getElementById(pageId).classList.remove('hidden');
+
+            if (pageId === 'page-templates') renderTemplateList();
+            if (pageId === 'page-booth') initCamera();
+            else stopCamera();
+        }
+
+        /* ================= RENDER TEMPLATES ================= */
+        function renderTemplateList() {
+            const grid = document.getElementById('template-grid');
+            grid.innerHTML = '';
+            TEMPLATES.forEach(tpl => {
+                const card = document.createElement('div');
+                card.className = "bg-pink-50 border-2 border-pink-200 rounded-2xl p-3 flex flex-col items-center cursor-pointer hover:border-pink-500 transition transform active:scale-95";
+                card.onclick = () => selectTemplate(tpl);
+                card.innerHTML = `
+                    <div class="w-full h-32 bg-white rounded-xl overflow-hidden flex items-center justify-center shadow-inner mb-2">
+                        <img src="${tpl.asset}" class="h-full object-contain" alt="${tpl.name}" onerror="this.src='https://via.placeholder.com/150?text=Template'">
+                    </div>
+                    <span class="font-bold text-xs text-gray-700">${tpl.name}</span>
+                    <span class="text-[10px] text-pink-500 font-semibold">${tpl.totalSlots} Slots</span>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function selectTemplate(tpl) {
+            selectedTemplate = tpl;
+            currentSlotIndex = 0;
+            capturedPhotos = [];
+            goToPage('page-booth');
+        }
+
+        function confirmChangeTemplate() {
+            if (confirm("Changing the template will restart your current photo session.")) {
+                goToPage('page-templates');
+            }
+        }
+
+        /* ================= CAMERA SERVICE ================= */
+        async function initCamera() {
+            const video = document.getElementById('webcam');
+            try {
+                if (videoStream) {
+                    videoStream.getTracks().forEach(track => track.stop());
+                }
+                videoStream = await navigator.mediaDevices.getUserMedia({
+                    video: { facingMode: useFrontCamera ? 'user' : 'environment', width: 1200, height: 1800 },
+                    audio: false
+                });
+                video.srcObject = videoStream;
+                updateBoothUI();
+            } catch (err) {
+                alert("Camera unavailable. You can upload photos instead.");
+                console.error(err);
+            }
+        }
+
+        function toggleCameraFacing() {
+            useFrontCamera = !useFrontCamera;
+            initCamera();
+        }
+
+        function stopCamera() {
+            if (videoStream) {
+                videoStream.getTracks().forEach(track => track.stop());
+                videoStream = null;
+            }
+        }
+
+        /* ================= COUNTDOWN & CAPTURE ================= */
+        function startCountdown() {
+            if (currentSlotIndex >= selectedTemplate.totalSlots) return;
+            const overlay = document.getElementById('countdown-overlay');
+            overlay.classList.remove('hidden');
+            let count = 3;
+            overlay.innerText = count;
+
+            let timer = setInterval(() => {
+                count--;
+                if (count > 0) {
+                    overlay.innerText = count;
+                } else {
+                    clearInterval(timer);
+                    overlay.classList.add('hidden');
+                    takeSnapshot();
+                }
+            }, 1000);
+        }
+
+        function takeSnapshot() {
+            const video = document.getElementById('webcam');
+            const tempCanvas = document.createElement('canvas');
+            tempCanvas.width = video.videoWidth || 1200;
+            tempCanvas.height = video.videoHeight || 1800;
+            const ctx = tempCanvas.getContext('2d');
+
+            if (useFrontCamera) {
+                ctx.translate(tempCanvas.width, 0);
+                ctx.scale(-1, 1);
+            }
+            ctx.drawImage(video, 0, 0, tempCanvas.width, tempCanvas.height);
+
+            storePhoto(tempCanvas.toDataURL('image/png'));
+        }
+
+        function handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                storePhoto(e.target.result);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        /* ================= AUTOMATIC SLOT FILLING ================= */
+        function storePhoto(dataUrl) {
+            if (currentSlotIndex < selectedTemplate.totalSlots) {
+                capturedPhotos[currentSlotIndex] = dataUrl;
+                currentSlotIndex++;
+                updateBoothUI();
+
+                if (currentSlotIndex >= selectedTemplate.totalSlots) {
+                    generateFinalComposite();
+                }
+            }
+        }
+
+        function updateBoothUI() {
+            document.getElementById('progress-indicator').innerText = `Photo ${currentSlotIndex + 1} / ${selectedTemplate.totalSlots}`;
+            const thumbContainer = document.getElementById('slot-thumbnails');
+            thumbContainer.innerHTML = '';
+
+            for (let i = 0; i < selectedTemplate.totalSlots; i++) {
+                const thumb = document.createElement('div');
+                thumb.className = `w-12 h-16 rounded-lg border-2 overflow-hidden bg-gray-200 flex items-center justify-center text-xs font-bold ${i < currentSlotIndex ? 'border-pink-500' : 'border-dashed border-gray-400'}`;
+                if (capturedPhotos[i]) {
+                    thumb.innerHTML = `<img src="${capturedPhotos[i]}" class="w-full h-full object-cover">`;
+                } else {
+                    thumb.innerText = `#${i+1}`;
+                }
+                thumbContainer.appendChild(thumb);
+            }
+        }
+
+        /* ================= IMAGE COMPOSITING (CANVAS) ================= */
+        function generateFinalComposite() {
+            goToPage('page-result');
+            const canvas = document.getElementById('compositing-canvas');
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            let loadedPhotos = 0;
+            capturedPhotos.forEach((url, idx) => {
+                let img = new Image();
+                img.src = url;
+                img.onload = () => {
+                    let slot = selectedTemplate.slots[idx];
+                    ctx.drawImage(img, slot[0], slot[1], slot[2], slot[3]);
+                    loadedPhotos++;
+                    if (loadedPhotos === selectedTemplate.totalSlots) {
+                        drawTemplateOverlayFinal(canvas);
+                    }
+                };
+            });
+        }
+
+        function drawTemplateOverlayFinal(canvas) {
+            const ctx = canvas.getContext('2d');
+            const templateImg = new Image();
+            templateImg.src = selectedTemplate.asset;
+            templateImg.onload = () => {
+                ctx.drawImage(templateImg, 0, 0, canvas.width, canvas.height);
+                const finalDataUrl = canvas.toDataURL('image/png');
+                document.getElementById('final-result-img').src = finalDataUrl;
+                document.getElementById('download-btn').href = finalDataUrl;
+
+                // Kirim otomatis ke Google Drive via Backend Bridge
+                uploadToGoogleDrive(finalDataUrl, capturedPhotos);
+            };
+        }
+
+        /* ================= GOOGLE DRIVE INTEGRATION ================= */
+        function uploadToGoogleDrive(finalData, rawArray) {
+            const statusEl = document.getElementById('drive-status');
+            if (GOOGLE_SCRIPT_URL.includes("MASUKKAN_URL")) {
+                statusEl.innerText = "⚠️ URL Google Apps Script belum disetup (Cek instruksi coding)";
+                return;
+            }
+
+            statusEl.innerText = "📤 Mengunggah raw photos & final result ke Google Drive...";
+
+            // Upload Final Result
+            fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                body: JSON.stringify({ sessionId, type: 'final', base64: finalData, filename: `${sessionId}_final.png` })
+            }).then(() => {
+                // Upload Raw Photos
+                rawArray.forEach((rawUrl, idx) => {
+                    fetch(GOOGLE_SCRIPT_URL, {
+                        method: 'POST',
+                        body: JSON.stringify({ sessionId, type: 'raw', base64: rawUrl, filename: `${sessionId}_photo_0${idx+1}.png` })
+                    });
+                });
+                statusEl.innerText = "✅ Berhasil tersimpan aman di Google Drive!";
+            }).catch(err => {
+                statusEl.innerText = "❌ Gagal koneksi cloud backup (Foto tetap aman di disk lokal).";
+                console.error(err);
+            });
+        }
+
+        function restartSession() {
+            selectedTemplate = null;
+            currentSlotIndex = 0;
+            capturedPhotos = [];
+            goToPage('page-landing');
+        }
+    </script>
+</body>
+</html>
         let capturedPhotos = [];
         let videoStream = null;
 
