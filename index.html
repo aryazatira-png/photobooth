@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pixella Digital Photobooth</title>
+    <!-- Tailwind CSS untuk Desain Visual -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -15,11 +16,11 @@
 
     <div id="app" class="w-full max-w-md bg-white rounded-3xl shadow-2xl overflow-hidden border-4 border-pink-200 relative min-h-[650px] flex flex-col">
 
-        <!-- LANDING PAGE -->
+        <!-- 1. LANDING PAGE -->
         <div id="page-landing" class="flex flex-col items-center justify-between p-6 h-full flex-grow text-center">
             <div class="mt-8">
                 <span class="bg-pink-100 text-pink-600 text-xs font-bold px-3 py-1 rounded-full uppercase">✨ Special Edition</span>
-                <h1 class="font-heading text-4xl text-pink-600 mt-4">READY AMELIA?[span_3](start_span)[span_3](end_span)</h1>
+                <h1 class="font-heading text-4xl text-pink-600 mt-4">READY AMELIA?</h1>
                 <p class="text-sm text-gray-500 mt-2">Capture your best moments, choose your template, and let's go!</p>
             </div>
             <div class="my-6 relative w-full flex justify-center">
@@ -27,22 +28,22 @@
                     <span class="text-6xl animate-bounce">📸</span>
                 </div>
             </div>
-            <button onclick="goToPage('page-templates')" class="w-full py-4 bg-pink-500 hover:bg-pink-600 text-white font-heading text-xl rounded-full shadow-lg mb-4">
-                START[span_4](start_span)[span_4](end_span)
+            <button onclick="goToPage('page-templates')" class="w-full py-4 bg-pink-500 hover:bg-pink-600 text-white font-heading text-xl rounded-full shadow-lg mb-4 cursor-pointer">
+                START
             </button>
         </div>
 
-        <!-- TEMPLATE SELECTION -->
+        <!-- 2. TEMPLATE SELECTION -->
         <div id="page-templates" class="hidden flex flex-col p-6 h-full flex-grow">
             <div class="flex items-center justify-between mb-4">
                 <button onclick="goToPage('page-landing')" class="text-pink-500 font-bold text-sm">← Back</button>
-                <h2 class="font-heading text-2xl text-pink-600">CHOOSE TEMPLATE[span_5](start_span)[span_5](end_span)</h2>
+                <h2 class="font-heading text-2xl text-pink-600">CHOOSE TEMPLATE</h2>
                 <div class="w-8"></div>
             </div>
             <div class="grid grid-cols-2 gap-3 overflow-y-auto max-h-[420px] pr-1 pb-4" id="template-grid"></div>
         </div>
 
-        <!-- PHOTOBOOTH -->
+        <!-- 3. PHOTOBOOTH -->
         <div id="page-booth" class="hidden flex flex-col p-4 h-full flex-grow justify-between">
             <div class="flex justify-between items-center mb-2">
                 <button onclick="confirmChangeTemplate()" class="text-xs bg-gray-100 px-3 py-1.5 rounded-full font-semibold text-gray-600">Change Template</button>
@@ -59,19 +60,19 @@
 
             <div class="grid grid-cols-2 gap-3 mt-2">
                 <label class="flex items-center justify-center py-3 bg-white border-2 border-pink-300 text-pink-600 font-bold text-sm rounded-2xl shadow-sm cursor-pointer hover:bg-pink-50">
-                    📂 Upload Photo[span_6](start_span)[span_6](end_span)
+                    📂 Upload Photo
                     <input type="file" accept="image/*" class="hidden" onchange="handleFileUpload(event)">
                 </label>
-                <button onclick="startCountdown()" class="py-3 bg-pink-500 hover:bg-pink-600 text-white font-bold text-sm rounded-2xl shadow-md flex items-center justify-center gap-1">
-                    📸 Capture[span_7](start_span)[span_7](end_span)
+                <button onclick="startCountdown()" class="py-3 bg-pink-500 hover:bg-pink-600 text-white font-bold text-sm rounded-2xl shadow-md flex items-center justify-center gap-1 cursor-pointer">
+                    📸 Capture
                 </button>
             </div>
         </div>
 
-        <!-- RESULT PAGE -->
+        <!-- 4. RESULT PAGE -->
         <div id="page-result" class="hidden flex flex-col p-6 h-full flex-grow items-center justify-between text-center overflow-y-auto">
             <div>
-                <h2 class="font-heading text-3xl text-pink-600 mb-1">MISSION COMPLETE[span_8](start_span)[span_8](end_span)!</h2>
+                <h2 class="font-heading text-3xl text-pink-600 mb-1">MISSION COMPLETE!</h2>
                 <p id="drive-status" class="text-xs text-amber-600 font-semibold mb-3">⏳ Menyimpan otomatis ke Google Drive...</p>
             </div>
 
@@ -80,11 +81,10 @@
             </div>
 
             <div class="flex flex-col gap-2.5 w-full mt-4">
-                <!-- Tombol Download Langsung untuk User -->
                 <a id="download-btn" download="photobooth-result.png" class="w-full">
-                    <button class="w-full py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-full shadow-md">💾 SAVE TO DISK / DOWNLOAD[span_9](start_span)[span_9](end_span)</button>
+                    <button class="w-full py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-full shadow-md cursor-pointer">💾 SAVE TO DISK / DOWNLOAD</button>
                 </a>
-                <button onclick="restartSession()" class="w-full py-3 bg-pink-100 hover:bg-pink-200 text-pink-600 font-bold rounded-full">🔄 REPLAY MISSION[span_10](start_span)[span_10](end_span)</button>
+                <button onclick="restartSession()" class="w-full py-3 bg-pink-100 hover:bg-pink-200 text-pink-600 font-bold rounded-full cursor-pointer">🔄 REPLAY MISSION</button>
             </div>
         </div>
 
@@ -93,6 +93,7 @@
     <canvas id="compositing-canvas" width="1200" height="1800" class="hidden"></canvas>
 
     <script>
+        // Konfigurasi 5 Template Custom
         const TEMPLATES = [
             { id: "template-01", name: "Toy Story", asset: "template-1.png", totalSlots: 4, slots: [[100, 150, 480, 750], [620, 150, 480, 750], [100, 920, 480, 750], [620, 920, 480, 750]] },
             { id: "template-02", name: "About You", asset: "template-2.png", totalSlots: 3, slots: [[150, 100, 900, 450], [150, 600, 900, 450], [150, 1100, 900, 450]] },
@@ -108,7 +109,7 @@
         let useFrontCamera = true;
         const sessionId = "PB-" + Date.now() + "-" + Math.random().toString(36).substring(2, 6).toUpperCase();
         
-        // Masukkan URL Web App Google Apps Script kamu di sini untuk menghimpun ke GDrive
+        // URL Google Apps Script untuk Google Drive
         const GOOGLE_SCRIPT_URL = "MASUKKAN_URL_WEB_APP_APPS_SCRIPT_DISINI";
 
         function goToPage(pageId) {
@@ -264,11 +265,9 @@
                 ctx.drawImage(templateImg, 0, 0, canvas.width, canvas.height);
                 const finalDataUrl = canvas.toDataURL('image/png');
                 
-                // 1. User bisa langsung download hasil akhir secara instan
                 document.getElementById('final-result-img').src = finalDataUrl;
                 document.getElementById('download-btn').href = finalDataUrl;
 
-                // 2. Di waktu yang sama, sistem otomatis menghimpun foto mentah & jadi ke Google Drive
                 uploadToGoogleDrive(finalDataUrl, capturedPhotos);
             };
         }
@@ -303,442 +302,6 @@
             currentSlotIndex = 0;
             capturedPhotos = [];
             goToPage('page-landing');
-        }
-    </script>
-</body>
-</html>
-        /* ================= 5 CUSTOM TEMPLATES CONFIGURATION ================= */
-        // Sesuaikan URL asset template PNG transparan dan slot koordinat [x, y, width, height]
-        const TEMPLATES = [
-            {
-                id: "template-01",
-                name: "Toy Story Vibe",
-                asset: "template-1.png", 
-                totalSlots: 4,
-                slots: [
-                    [100, 150, 480, 750],
-                    [620, 150, 480, 750],
-                    [100, 920, 480, 750],
-                    [620, 920, 480, 750]
-                ]
-            },
-            {
-                id: "template-02",
-                name: "About You",
-                asset: "template-2.png",
-                totalSlots: 3,
-                slots: [
-                    [150, 100, 900, 450],
-                    [150, 600, 900, 450],
-                    [150, 1100, 900, 450]
-                ]
-            },
-            {
-                id: "template-03",
-                name: "King Barca",
-                asset: "template-3.png",
-                totalSlots: 6,
-                slots: [
-                    [100, 150, 480, 350], [620, 150, 480, 350],
-                    [100, 530, 480, 350], [620, 530, 480, 350],
-                    [100, 910, 480, 350], [620, 910, 480, 350]
-                ]
-            },
-            {
-                id: "template-04",
-                name: "Gak Tau",
-                asset: "template-4.png",
-                totalSlots: 4,
-                slots: [
-                    [100, 150, 480, 750], [620, 150, 480, 750],
-                    [100, 920, 480, 750], [620, 920, 480, 750]
-                ]
-            },
-            {
-                id: "template-05",
-                name: "Special Edition",
-                asset: "template-5.png",
-                totalSlots: 3,
-                slots: [
-                    [150, 100, 900, 450],
-                    [150, 600, 900, 450],
-                    [150, 1100, 900, 450]
-                ]
-            }
-        ];
-
-        let selectedTemplate = null;
-        let currentSlotIndex = 0;
-        let capturedPhotos = [];
-        let videoStream = null;
-        let useFrontCamera = true;
-        const sessionId = "PB-" + Date.now() + "-" + Math.random().toString(36).substring(2, 6).toUpperCase();
-
-        // Ganti dengan URL Google Apps Script Web App kamu untuk penyimpanan ke Google Drive
-        const GOOGLE_SCRIPT_URL = "MASUKKAN_URL_WEB_APP_APPS_SCRIPT_DISINI";
-
-        /* ================= NAVIGATION SYSTEM ================= */
-        function goToPage(pageId) {
-            document.querySelectorAll('#app > div').forEach(div => div.classList.add('hidden'));
-            document.getElementById(pageId).classList.remove('hidden');
-
-            if (pageId === 'page-templates') renderTemplateList();
-            if (pageId === 'page-booth') initCamera();
-            else stopCamera();
-        }
-
-        /* ================= RENDER TEMPLATES ================= */
-        function renderTemplateList() {
-            const grid = document.getElementById('template-grid');
-            grid.innerHTML = '';
-            TEMPLATES.forEach(tpl => {
-                const card = document.createElement('div');
-                card.className = "bg-pink-50 border-2 border-pink-200 rounded-2xl p-3 flex flex-col items-center cursor-pointer hover:border-pink-500 transition transform active:scale-95";
-                card.onclick = () => selectTemplate(tpl);
-                card.innerHTML = `
-                    <div class="w-full h-32 bg-white rounded-xl overflow-hidden flex items-center justify-center shadow-inner mb-2">
-                        <img src="${tpl.asset}" class="h-full object-contain" alt="${tpl.name}" onerror="this.src='https://via.placeholder.com/150?text=Template'">
-                    </div>
-                    <span class="font-bold text-xs text-gray-700">${tpl.name}</span>
-                    <span class="text-[10px] text-pink-500 font-semibold">${tpl.totalSlots} Slots</span>
-                `;
-                grid.appendChild(card);
-            });
-        }
-
-        function selectTemplate(tpl) {
-            selectedTemplate = tpl;
-            currentSlotIndex = 0;
-            capturedPhotos = [];
-            goToPage('page-booth');
-        }
-
-        function confirmChangeTemplate() {
-            if (confirm("Changing the template will restart your current photo session.")) {
-                goToPage('page-templates');
-            }
-        }
-
-        /* ================= CAMERA SERVICE ================= */
-        async function initCamera() {
-            const video = document.getElementById('webcam');
-            try {
-                if (videoStream) {
-                    videoStream.getTracks().forEach(track => track.stop());
-                }
-                videoStream = await navigator.mediaDevices.getUserMedia({
-                    video: { facingMode: useFrontCamera ? 'user' : 'environment', width: 1200, height: 1800 },
-                    audio: false
-                });
-                video.srcObject = videoStream;
-                updateBoothUI();
-            } catch (err) {
-                alert("Camera unavailable. You can upload photos instead.");
-                console.error(err);
-            }
-        }
-
-        function toggleCameraFacing() {
-            useFrontCamera = !useFrontCamera;
-            initCamera();
-        }
-
-        function stopCamera() {
-            if (videoStream) {
-                videoStream.getTracks().forEach(track => track.stop());
-                videoStream = null;
-            }
-        }
-
-        /* ================= COUNTDOWN & CAPTURE ================= */
-        function startCountdown() {
-            if (currentSlotIndex >= selectedTemplate.totalSlots) return;
-            const overlay = document.getElementById('countdown-overlay');
-            overlay.classList.remove('hidden');
-            let count = 3;
-            overlay.innerText = count;
-
-            let timer = setInterval(() => {
-                count--;
-                if (count > 0) {
-                    overlay.innerText = count;
-                } else {
-                    clearInterval(timer);
-                    overlay.classList.add('hidden');
-                    takeSnapshot();
-                }
-            }, 1000);
-        }
-
-        function takeSnapshot() {
-            const video = document.getElementById('webcam');
-            const tempCanvas = document.createElement('canvas');
-            tempCanvas.width = video.videoWidth || 1200;
-            tempCanvas.height = video.videoHeight || 1800;
-            const ctx = tempCanvas.getContext('2d');
-
-            if (useFrontCamera) {
-                ctx.translate(tempCanvas.width, 0);
-                ctx.scale(-1, 1);
-            }
-            ctx.drawImage(video, 0, 0, tempCanvas.width, tempCanvas.height);
-
-            storePhoto(tempCanvas.toDataURL('image/png'));
-        }
-
-        function handleFileUpload(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                storePhoto(e.target.result);
-            };
-            reader.readAsDataURL(file);
-        }
-
-        /* ================= AUTOMATIC SLOT FILLING ================= */
-        function storePhoto(dataUrl) {
-            if (currentSlotIndex < selectedTemplate.totalSlots) {
-                capturedPhotos[currentSlotIndex] = dataUrl;
-                currentSlotIndex++;
-                updateBoothUI();
-
-                if (currentSlotIndex >= selectedTemplate.totalSlots) {
-                    generateFinalComposite();
-                }
-            }
-        }
-
-        function updateBoothUI() {
-            document.getElementById('progress-indicator').innerText = `Photo ${currentSlotIndex + 1} / ${selectedTemplate.totalSlots}`;
-            const thumbContainer = document.getElementById('slot-thumbnails');
-            thumbContainer.innerHTML = '';
-
-            for (let i = 0; i < selectedTemplate.totalSlots; i++) {
-                const thumb = document.createElement('div');
-                thumb.className = `w-12 h-16 rounded-lg border-2 overflow-hidden bg-gray-200 flex items-center justify-center text-xs font-bold ${i < currentSlotIndex ? 'border-pink-500' : 'border-dashed border-gray-400'}`;
-                if (capturedPhotos[i]) {
-                    thumb.innerHTML = `<img src="${capturedPhotos[i]}" class="w-full h-full object-cover">`;
-                } else {
-                    thumb.innerText = `#${i+1}`;
-                }
-                thumbContainer.appendChild(thumb);
-            }
-        }
-
-        /* ================= IMAGE COMPOSITING (CANVAS) ================= */
-        function generateFinalComposite() {
-            goToPage('page-result');
-            const canvas = document.getElementById('compositing-canvas');
-            const ctx = canvas.getContext('2d');
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            let loadedPhotos = 0;
-            capturedPhotos.forEach((url, idx) => {
-                let img = new Image();
-                img.src = url;
-                img.onload = () => {
-                    let slot = selectedTemplate.slots[idx];
-                    ctx.drawImage(img, slot[0], slot[1], slot[2], slot[3]);
-                    loadedPhotos++;
-                    if (loadedPhotos === selectedTemplate.totalSlots) {
-                        drawTemplateOverlayFinal(canvas);
-                    }
-                };
-            });
-        }
-
-        function drawTemplateOverlayFinal(canvas) {
-            const ctx = canvas.getContext('2d');
-            const templateImg = new Image();
-            templateImg.src = selectedTemplate.asset;
-            templateImg.onload = () => {
-                ctx.drawImage(templateImg, 0, 0, canvas.width, canvas.height);
-                const finalDataUrl = canvas.toDataURL('image/png');
-                document.getElementById('final-result-img').src = finalDataUrl;
-                document.getElementById('download-btn').href = finalDataUrl;
-
-                // Kirim otomatis ke Google Drive via Backend Bridge
-                uploadToGoogleDrive(finalDataUrl, capturedPhotos);
-            };
-        }
-
-        /* ================= GOOGLE DRIVE INTEGRATION ================= */
-        function uploadToGoogleDrive(finalData, rawArray) {
-            const statusEl = document.getElementById('drive-status');
-            if (GOOGLE_SCRIPT_URL.includes("MASUKKAN_URL")) {
-                statusEl.innerText = "⚠️ URL Google Apps Script belum disetup (Cek instruksi coding)";
-                return;
-            }
-
-            statusEl.innerText = "📤 Mengunggah raw photos & final result ke Google Drive...";
-
-            // Upload Final Result
-            fetch(GOOGLE_SCRIPT_URL, {
-                method: 'POST',
-                body: JSON.stringify({ sessionId, type: 'final', base64: finalData, filename: `${sessionId}_final.png` })
-            }).then(() => {
-                // Upload Raw Photos
-                rawArray.forEach((rawUrl, idx) => {
-                    fetch(GOOGLE_SCRIPT_URL, {
-                        method: 'POST',
-                        body: JSON.stringify({ sessionId, type: 'raw', base64: rawUrl, filename: `${sessionId}_photo_0${idx+1}.png` })
-                    });
-                });
-                statusEl.innerText = "✅ Berhasil tersimpan aman di Google Drive!";
-            }).catch(err => {
-                statusEl.innerText = "❌ Gagal koneksi cloud backup (Foto tetap aman di disk lokal).";
-                console.error(err);
-            });
-        }
-
-        function restartSession() {
-            selectedTemplate = null;
-            currentSlotIndex = 0;
-            capturedPhotos = [];
-            goToPage('page-landing');
-        }
-    </script>
-</body>
-</html>
-        let capturedPhotos = [];
-        let videoStream = null;
-
-        // Pindah ke halaman Pilih Template
-        function goToTemplate() {
-            document.getElementById('page-landing').classList.add('hidden');
-            document.getElementById('page-template').classList.remove('hidden');
-        }
-
-        // Pilih Template dan Nyalakan Kamera
-        function selectTemplate(templateName) {
-            chosenTemplate = templateName;
-            document.getElementById('selected-template-name').innerText = templateName;
-            
-            document.getElementById('page-template').classList.add('hidden');
-            document.getElementById('page-booth').classList.remove('hidden');
-            
-            startCamera();
-        }
-
-        // Mengaktifkan Kamera Perangkat
-        async function startCamera() {
-            try {
-                videoStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
-                const videoElement = document.getElementById('camera-preview');
-                videoElement.srcObject = videoStream;
-            } catch (error) {
-                alert('Kamera tidak dapat diakses. Silakan gunakan tombol Upload Foto.');
-            }
-        }
-
-        // Hitung Mundur Sebelum Ambil Foto
-        function startCountdown() {
-            const cdDisplay = document.getElementById('countdown-display');
-            cdDisplay.classList.remove('hidden');
-            let count = 3;
-            cdDisplay.innerText = count;
-
-            let timer = setInterval(() => {
-                count--;
-                if (count > 0) {
-                    cdDisplay.innerText = count;
-                } else {
-                    clearInterval(timer);
-                    cdDisplay.classList.add('hidden');
-                    takeSnapshot();
-                }
-            }, 1000);
-        }
-
-        // Mengambil Snapshot dari Video Kamera
-        function takeSnapshot() {
-            const video = document.getElementById('camera-preview');
-            const canvas = document.createElement('canvas');
-            canvas.width = 400;
-            canvas.height = 400;
-            const ctx = canvas.getContext('2d');
-            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-            
-            savePhoto(canvas.toDataURL('image/jpeg'));
-        }
-
-        // Mengambil Foto dari File Upload
-        function handleUpload(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    savePhoto(e.target.result);
-                }
-                reader.readAsDataURL(file);
-            }
-        }
-
-        // Menyimpan Foto ke Sesi
-        function savePhoto(dataUrl) {
-            capturedPhotos.push(dataUrl);
-            photoCount++;
-
-            if (photoCount < maxPhotos) {
-                document.getElementById('photo-counter').innerText = `Foto ${photoCount + 1} / ${maxPhotos}`;
-            } else {
-                // Matikan kamera dan tampilkan hasil
-                if (videoStream) {
-                    videoStream.getTracks().forEach(track => track.stop());
-                }
-                generateResult();
-            }
-        }
-
-        // Menggabungkan Foto ke Canvas (Hasil Akhir)
-        function generateResult() {
-            document.getElementById('page-booth').classList.add('hidden');
-            document.getElementById('page-result').classList.remove('hidden');
-
-            const canvas = document.getElementById('result-canvas');
-            const ctx = canvas.getContext('2d');
-            canvas.width = 400;
-            canvas.height = 800;
-
-            // Background Putih
-            ctx.fillStyle = '#ffffff';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            // Judul di Hasil
-            ctx.fillStyle = '#db2777';
-            ctx.font = 'bold 20px Poppins';
-            ctx.textAlign = 'center';
-            ctx.fillText(chosenTemplate.toUpperCase(), canvas.width / 2, 40);
-
-            // Gambar foto-foto yang sudah diambil secara berurutan ke dalam canvas
-            let loadedImages = 0;
-            capturedPhotos.forEach((src, index) => {
-                const img = new Image();
-                img.src = src;
-                img.onload = function() {
-                    let yPos = 60 + (index * 220);
-                    ctx.drawImage(img, 50, yPos, 300, 200);
-                    loadedImages++;
-                }
-            });
-        }
-
-        // Fitur Download Hasil Foto
-        function downloadPhoto() {
-            const canvas = document.getElementById('result-canvas');
-            const link = document.createElement('a');
-            link.download = 'photobooth-result.jpg';
-            link.href = canvas.toDataURL('image/jpeg');
-            link.click();
-        }
-
-        // Mulai dari awal
-        function resetApp() {
-            photoCount = 0;
-            capturedPhotos = [];
-            document.getElementById('page-result').classList.add('hidden');
-            document.getElementById('page-landing').classList.remove('hidden');
         }
     </script>
 </body>
