@@ -95,16 +95,16 @@
 
     <script>
         // Konfigurasi 4 Template Baru Sesuai Lampiranmu
-              const TEMPLATES = [
+                      const TEMPLATES = [
             { 
                 id: "template-01", 
                 name: "About You", 
                 asset: "template-1.png", 
                 totalSlots: 3, 
                 slots: [
-                    [130, 75, 940, 530],   // Slot 1 (Atas - sudah dinaikkan dikit)
-                    [130, 640, 940, 530],  // Slot 2 (Tengah)
-                    [130, 1190, 940, 530]  // Slot 3 (Bawah)
+                    [130, 75, 940, 530],   
+                    [130, 640, 940, 530],  
+                    [130, 1190, 940, 530]  
                 ] 
             },
             { 
@@ -113,10 +113,10 @@
                 asset: "template-2.png", 
                 totalSlots: 4, 
                 slots: [
-                    [95, 115, 480, 480],   
-                    [625, 115, 480, 480],  
-                    [95, 630, 480, 480],   
-                    [625, 630, 480, 480]   
+                    [85, 140, 510, 510],   // Slot 1 (Kiri Atas - Diperbesar, digeser ke kiri & kebawah)
+                    [605, 140, 510, 510],  // Slot 2 (Kanan Atas - Diperbesar, digeser ke kiri & kebawah)
+                    [85, 670, 510, 510],   // Slot 3 (Kiri Bawah - Diperbesar, digeser ke kiri & kebawah)
+                    [605, 670, 510, 510]   // Slot 4 (Kanan Bawah - Diperbesar, digeser ke kiri & kebawah)
                 ] 
             },
             { 
@@ -137,13 +137,14 @@
                 asset: "template-4.png", 
                 totalSlots: 4, 
                 slots: [
-                    [95, 105, 480, 480],   
-                    [625, 105, 480, 480],  
-                    [95, 625, 480, 480],   
-                    [625, 625, 480, 480]   
+                    [85, 135, 510, 510],   
+                    [605, 135, 510, 510],  
+                    [85, 670, 510, 510],   
+                    [605, 670, 510, 510]   
                 ] 
             }
         ];
+
 
 
         let selectedTemplate = null;
