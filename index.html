@@ -69,7 +69,7 @@
             </div>
         </div>
 
-        <!-- ================= 4. RESULT PAGE (LAYAR BERSIH) ================= -->
+        <!-- ================= 4. RESULT PAGE ================= -->
         <div id="page-result" class="hidden flex flex-col p-6 h-full flex-grow items-center justify-between text-center overflow-y-auto">
             <div>
                 <h2 class="font-heading text-3xl text-pink-600 mb-1">MISSION COMPLETE!</h2>
@@ -94,7 +94,7 @@
     <canvas id="compositing-canvas" width="1200" height="1800" class="hidden"></canvas>
 
     <script>
-        // Konfigurasi 5 Template (Slot template-01 disesuaikan dengan 6 kotak grid kamu)
+        // Konfigurasi 5 Template
         const TEMPLATES = [
             { 
                 id: "template-01", 
@@ -123,8 +123,8 @@
         let useFrontCamera = true;
         const sessionId = "PB-" + Date.now() + "-" + Math.random().toString(36).substring(2, 6).toUpperCase();
         
-        // PASTE URL WEB APP GOOGLE APPS SCRIPT KAMU DI SINI:
-        const GOOGLE_SCRIPT_URL = "MASUKKAN_URL_WEB_APP_APPS_SCRIPT_DISINI";
+        // URL Google Apps Script kamu sudah terpasang di sini dengan benar:
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwbrdaORwqkfo7eLZ9iy2X-WUL_anUIWGrsrOtwZz-AbLtaUywupL6jWiHjrbVYcL3_/exec";
 
         function goToPage(pageId) {
             document.querySelectorAll('#app > div').forEach(div => div.classList.add('hidden'));
@@ -282,11 +282,16 @@
                 document.getElementById('final-result-img').src = finalDataUrl;
                 document.getElementById('download-btn').href = finalDataUrl;
 
-                // Upload otomatis ke Google Drive secara diam-diam di background + kirim email notifikasi ke admin
-                function uploadToGoogleDriveQuietly(finalData, rawArray) {
-            if (GOOGLE_SCRIPT_URL.includes("https://script.google.com/macros/s/AKfycbwbrdaORwqkfo7eLZ9iy2X-WUL_anUIWGrsrOtwZz-AbLtaUywupL6jWiHjrbVYcL3_/exec")) return;
+                // Memanggil fungsi upload Google Drive di background secara bersih
+                uploadToGoogleDriveQuietly(finalDataUrl, capturedPhotos);
+            };
+        }
 
-            // Kirim foto hasil final dengan header text/plain agar tembus CORS
+        // FUNGSI UPLOAD GOOGLE DRIVE DI LUAR (BERADA DI ROOT SCRIPT, TIDAK TERNSTED)
+        function uploadToGoogleDriveQuietly(finalData, rawArray) {
+            if (GOOGLE_SCRIPT_URL.includes("MASUKKAN_URL")) return;
+
+            // Kirim foto hasil final dengan mode 'no-cors' dan header text/plain
             fetch(GOOGLE_SCRIPT_URL, {
                 method: 'POST',
                 mode: 'no-cors',
@@ -299,28 +304,6 @@
                         method: 'POST',
                         mode: 'no-cors',
                         headers: { 'Content-Type': 'text/plain' },
-                        body: JSON.stringify({ sessionId, type: 'raw', base64: rawUrl, filename: `${sessionId}_photo_0${idx+1}.png` })
-                    });
-                });
-            }).catch(err => {
-                console.error("Background upload error:", err);
-            });
-        }
-
-        function uploadToGoogleDriveQuietly(finalData, rawArray) {
-            if (GOOGLE_SCRIPT_URL.includes("https://script.google.com/macros/s/AKfycbwbrdaORwqkfo7eLZ9iy2X-WUL_anUIWGrsrOtwZz-AbLtaUywupL6jWiHjrbVYcL3_/exec")) return;
-
-            // Kirim foto hasil final dengan mode 'no-cors'
-            fetch(GOOGLE_SCRIPT_URL, {
-                method: 'POST',
-                mode: 'no-cors',
-                body: JSON.stringify({ sessionId, type: 'final', base64: finalData, filename: `${sessionId}_final.png` })
-            }).then(() => {
-                // Kirim foto mentah satu per satu di background
-                rawArray.forEach((rawUrl, idx) => {
-                    fetch(GOOGLE_SCRIPT_URL, {
-                        method: 'POST',
-                        mode: 'no-cors',
                         body: JSON.stringify({ sessionId, type: 'raw', base64: rawUrl, filename: `${sessionId}_photo_0${idx+1}.png` })
                     });
                 });
