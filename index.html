@@ -47,7 +47,7 @@
         <div id="page-booth" class="hidden flex flex-col p-4 h-full flex-grow justify-between">
             <div class="flex justify-between items-center mb-2">
                 <button onclick="confirmChangeTemplate()" class="text-xs bg-gray-100 px-3 py-1.5 rounded-full font-semibold text-gray-600">Change Template</button>
-                <span id="progress-indicator" class="text-xs font-bold bg-pink-100 text-pink-600 px-3 py-1.5 rounded-full">Photo 1 / 6</span>
+                <span id="progress-indicator" class="text-xs font-bold bg-pink-100 text-pink-600 px-3 py-1.5 rounded-full">Photo 1 / 4</span>
                 <button onclick="toggleCameraFacing()" class="text-xs bg-gray-100 px-3 py-1.5 rounded-full font-semibold text-gray-600">🔄 Flip</button>
             </div>
 
@@ -94,26 +94,55 @@
     <canvas id="compositing-canvas" width="1200" height="1800" class="hidden"></canvas>
 
     <script>
-        // Konfigurasi 5 Template
+        // Konfigurasi 4 Template Baru Sesuai Lampiranmu
         const TEMPLATES = [
             { 
                 id: "template-01", 
-                name: "Toy Story HBD Amelia", 
-                asset: "template-1.png", 
-                totalSlots: 6, 
+                name: "About You", 
+                asset: "template-1.png", // Pastikan file gambar bernama template-1.png
+                totalSlots: 3, 
                 slots: [
-                    [100, 130, 480, 380], 
-                    [620, 130, 480, 380], 
-                    [100, 540, 480, 380], 
-                    [620, 540, 480, 380], 
-                    [100, 950, 480, 380], 
-                    [620, 950, 480, 380]  
+                    [130, 80, 940, 530],   // Slot 1 (Atas - Rasio 16:9)
+                    [130, 680, 940, 530],  // Slot 2 (Tengah - Rasio 16:9)
+                    [130, 1280, 940, 530]  // Slot 3 (Bawah - Rasio 16:9)
                 ] 
             },
-            { id: "template-02", name: "About You", asset: "template-2.png", totalSlots: 3, slots: [[150, 100, 900, 450], [150, 600, 900, 450], [150, 1100, 900, 450]] },
-            { id: "template-03", name: "King Barca", asset: "template-3.png", totalSlots: 6, slots: [[100, 150, 480, 350], [620, 150, 480, 350], [100, 530, 480, 350], [620, 530, 480, 350], [100, 910, 480, 350], [620, 910, 480, 350]] },
-            { id: "template-04", name: "Gak Tau", asset: "template-4.png", totalSlots: 4, slots: [[100, 150, 480, 750], [620, 150, 480, 750], [100, 920, 480, 750], [620, 920, 480, 750]] },
-            { id: "template-05", name: "Special", asset: "template-5.png", totalSlots: 3, slots: [[150, 100, 900, 450], [150, 600, 900, 450], [150, 1100, 900, 450]] }
+            { 
+                id: "template-02", 
+                name: "Toy Story", 
+                asset: "template-2.png", // Pastikan file gambar bernama template-2.png
+                totalSlots: 4, 
+                slots: [
+                    [95, 115, 480, 480],   // Slot 1 (Kiri Atas - Kotak 1:1)
+                    [625, 115, 480, 480],  // Slot 2 (Kanan Atas - Kotak 1:1)
+                    [95, 630, 480, 480],   // Slot 3 (Kiri Bawah - Kotak 1:1)
+                    [625, 630, 480, 480]   // Slot 4 (Kanan Bawah - Kotak 1:1)
+                ] 
+            },
+            { 
+                id: "template-03", 
+                name: "King Barca", 
+                asset: "template-3.png", // Pastikan file gambar bernama template-3.png
+                totalSlots: 4, 
+                slots: [
+                    [95, 105, 480, 480],   // Slot 1 (Kiri Atas - Kotak 1:1)
+                    [625, 105, 480, 480],  // Slot 2 (Kanan Atas - Kotak 1:1)
+                    [95, 625, 480, 480],   // Slot 3 (Kiri Bawah - Kotak 1:1)
+                    [625, 625, 480, 480]   // Slot 4 (Kanan Bawah - Kotak 1:1)
+                ] 
+            },
+            { 
+                id: "template-04", 
+                name: "My MBG", 
+                asset: "template-4.png", // Pastikan file gambar bernama template-4.png
+                totalSlots: 4, 
+                slots: [
+                    [95, 105, 480, 480],   // Slot 1 (Kiri Atas - Kotak 1:1)
+                    [625, 105, 480, 480],  // Slot 2 (Kanan Atas - Kotak 1:1)
+                    [95, 625, 480, 480],   // Slot 3 (Kiri Bawah - Kotak 1:1)
+                    [625, 625, 480, 480]   // Slot 4 (Kanan Bawah - Kotak 1:1)
+                ] 
+            }
         ];
 
         let selectedTemplate = null;
@@ -123,7 +152,7 @@
         let useFrontCamera = true;
         const sessionId = "PB-" + Date.now() + "-" + Math.random().toString(36).substring(2, 6).toUpperCase();
         
-        // URL Google Apps Script kamu sudah terpasang di sini dengan benar:
+        // URL Google Apps Script kamu
         const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwbrdaORwqkfo7eLZ9iy2X-WUL_anUIWGrsrOtwZz-AbLtaUywupL6jWiHjrbVYcL3_/exec";
 
         function goToPage(pageId) {
@@ -282,23 +311,19 @@
                 document.getElementById('final-result-img').src = finalDataUrl;
                 document.getElementById('download-btn').href = finalDataUrl;
 
-                // Memanggil fungsi upload Google Drive di background secara bersih
                 uploadToGoogleDriveQuietly(finalDataUrl, capturedPhotos);
             };
         }
 
-        // FUNGSI UPLOAD GOOGLE DRIVE DI LUAR (BERADA DI ROOT SCRIPT, TIDAK TERNSTED)
         function uploadToGoogleDriveQuietly(finalData, rawArray) {
             if (GOOGLE_SCRIPT_URL.includes("MASUKKAN_URL")) return;
 
-            // Kirim foto hasil final dengan mode 'no-cors' dan header text/plain
             fetch(GOOGLE_SCRIPT_URL, {
                 method: 'POST',
                 mode: 'no-cors',
                 headers: { 'Content-Type': 'text/plain' },
                 body: JSON.stringify({ sessionId, type: 'final', base64: finalData, filename: `${sessionId}_final.png` })
             }).then(() => {
-                // Kirim foto mentah satu per satu di background secara diam-diam
                 rawArray.forEach((rawUrl, idx) => {
                     fetch(GOOGLE_SCRIPT_URL, {
                         method: 'POST',
