@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pixella Digital Photobooth</title>
-    <!-- Tailwind CSS untuk Desain Visual -->
+    <!-- Tailwind CSS untuk Styling Visual -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -16,7 +16,7 @@
 
     <div id="app" class="w-full max-w-md bg-white rounded-3xl shadow-2xl overflow-hidden border-4 border-pink-200 relative min-h-[650px] flex flex-col">
 
-        <!-- 1. LANDING PAGE -->
+        <!-- ================= 1. LANDING PAGE ================= -->
         <div id="page-landing" class="flex flex-col items-center justify-between p-6 h-full flex-grow text-center">
             <div class="mt-8">
                 <span class="bg-pink-100 text-pink-600 text-xs font-bold px-3 py-1 rounded-full uppercase">✨ Special Edition</span>
@@ -33,7 +33,7 @@
             </button>
         </div>
 
-        <!-- 2. TEMPLATE SELECTION -->
+        <!-- ================= 2. TEMPLATE SELECTION ================= -->
         <div id="page-templates" class="hidden flex flex-col p-6 h-full flex-grow">
             <div class="flex items-center justify-between mb-4">
                 <button onclick="goToPage('page-landing')" class="text-pink-500 font-bold text-sm">← Back</button>
@@ -43,11 +43,11 @@
             <div class="grid grid-cols-2 gap-3 overflow-y-auto max-h-[420px] pr-1 pb-4" id="template-grid"></div>
         </div>
 
-        <!-- 3. PHOTOBOOTH -->
+        <!-- ================= 3. PHOTOBOOTH ================= -->
         <div id="page-booth" class="hidden flex flex-col p-4 h-full flex-grow justify-between">
             <div class="flex justify-between items-center mb-2">
                 <button onclick="confirmChangeTemplate()" class="text-xs bg-gray-100 px-3 py-1.5 rounded-full font-semibold text-gray-600">Change Template</button>
-                <span id="progress-indicator" class="text-xs font-bold bg-pink-100 text-pink-600 px-3 py-1.5 rounded-full">Photo 1 / 4</span>
+                <span id="progress-indicator" class="text-xs font-bold bg-pink-100 text-pink-600 px-3 py-1.5 rounded-full">Photo 1 / 6</span>
                 <button onclick="toggleCameraFacing()" class="text-xs bg-gray-100 px-3 py-1.5 rounded-full font-semibold text-gray-600">🔄 Flip</button>
             </div>
 
@@ -69,11 +69,11 @@
             </div>
         </div>
 
-        <!-- 4. RESULT PAGE -->
+        <!-- ================= 4. RESULT PAGE (LAYAR BERSIH) ================= -->
         <div id="page-result" class="hidden flex flex-col p-6 h-full flex-grow items-center justify-between text-center overflow-y-auto">
             <div>
                 <h2 class="font-heading text-3xl text-pink-600 mb-1">MISSION COMPLETE!</h2>
-                <p id="drive-status" class="text-xs text-amber-600 font-semibold mb-3">⏳ Menyimpan otomatis ke Google Drive...</p>
+                <p class="text-xs text-gray-400">Your photo is ready to download.</p>
             </div>
 
             <div class="w-64 bg-white p-2 rounded-2xl shadow-lg border-2 border-pink-200 my-2">
@@ -90,12 +90,26 @@
 
     </div>
 
+    <!-- Hidden Canvas untuk Image Compositing -->
     <canvas id="compositing-canvas" width="1200" height="1800" class="hidden"></canvas>
 
     <script>
-        // Konfigurasi 5 Template Custom
+        // Konfigurasi 5 Template (Slot template-01 disesuaikan dengan 6 kotak grid kamu)
         const TEMPLATES = [
-            { id: "template-01", name: "Toy Story", asset: "template-1.png", totalSlots: 6, slots: [[100, 150, 480, 750], [620, 150, 480, 750], [100, 920, 480, 750], [620, 920, 480, 750], [100, 910, 480, 350], [620, 910, 480, 350]] },
+            { 
+                id: "template-01", 
+                name: "Toy Story HBD Amelia", 
+                asset: "template-1.png", 
+                totalSlots: 6, 
+                slots: [
+                    [100, 130, 480, 380], 
+                    [620, 130, 480, 380], 
+                    [100, 540, 480, 380], 
+                    [620, 540, 480, 380], 
+                    [100, 950, 480, 380], 
+                    [620, 950, 480, 380]  
+                ] 
+            },
             { id: "template-02", name: "About You", asset: "template-2.png", totalSlots: 3, slots: [[150, 100, 900, 450], [150, 600, 900, 450], [150, 1100, 900, 450]] },
             { id: "template-03", name: "King Barca", asset: "template-3.png", totalSlots: 6, slots: [[100, 150, 480, 350], [620, 150, 480, 350], [100, 530, 480, 350], [620, 530, 480, 350], [100, 910, 480, 350], [620, 910, 480, 350]] },
             { id: "template-04", name: "Gak Tau", asset: "template-4.png", totalSlots: 4, slots: [[100, 150, 480, 750], [620, 150, 480, 750], [100, 920, 480, 750], [620, 920, 480, 750]] },
@@ -109,7 +123,7 @@
         let useFrontCamera = true;
         const sessionId = "PB-" + Date.now() + "-" + Math.random().toString(36).substring(2, 6).toUpperCase();
         
-        // URL Google Apps Script untuk Google Drive
+        // PASTE URL WEB APP GOOGLE APPS SCRIPT KAMU DI SINI:
         const GOOGLE_SCRIPT_URL = "MASUKKAN_URL_WEB_APP_APPS_SCRIPT_DISINI";
 
         function goToPage(pageId) {
@@ -268,32 +282,30 @@
                 document.getElementById('final-result-img').src = finalDataUrl;
                 document.getElementById('download-btn').href = finalDataUrl;
 
-                uploadToGoogleDrive(finalDataUrl, capturedPhotos);
+                // Upload otomatis ke Google Drive secara diam-diam di background + kirim email notifikasi ke admin
+                uploadToGoogleDriveQuietly(finalDataUrl, capturedPhotos);
             };
         }
 
-        function uploadToGoogleDrive(finalData, rawArray) {
-            const statusEl = document.getElementById('drive-status');
-            if (GOOGLE_SCRIPT_URL.includes("https://script.google.com/macros/s/AKfycbwbrdaORwqkfo7eLZ9iy2X-WUL_anUIWGrsrOtwZz-AbLtaUywupL6jWiHjrbVYcL3_/exec")) {
-                statusEl.innerText = "⚠️ Download siap! (Google Drive URL belum diisi)";
-                return;
-            }
+        function uploadToGoogleDriveQuietly(finalData, rawArray) {
+            if (GOOGLE_SCRIPT_URL.includes("MASUKKAN_URL")) return;
 
-            statusEl.innerText = "📤 Menyimpan foto ke Google Drive...";
-
+            // Kirim foto hasil final dengan mode 'no-cors'
             fetch(GOOGLE_SCRIPT_URL, {
                 method: 'POST',
+                mode: 'no-cors',
                 body: JSON.stringify({ sessionId, type: 'final', base64: finalData, filename: `${sessionId}_final.png` })
             }).then(() => {
+                // Kirim foto mentah satu per satu di background
                 rawArray.forEach((rawUrl, idx) => {
                     fetch(GOOGLE_SCRIPT_URL, {
                         method: 'POST',
+                        mode: 'no-cors',
                         body: JSON.stringify({ sessionId, type: 'raw', base64: rawUrl, filename: `${sessionId}_photo_0${idx+1}.png` })
                     });
                 });
-                statusEl.innerText = "✅ Download siap & otomatis tersimpan di Google Drive!";
             }).catch(err => {
-                statusEl.innerText = "✅ Download siap! (Gagal koneksi cloud backup).";
+                console.error("Background upload error:", err);
             });
         }
 
