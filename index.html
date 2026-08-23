@@ -95,16 +95,16 @@
 
     <script>
         // Konfigurasi 4 Template Baru Sesuai Lampiranmu
-      const TEMPLATES = [
+              const TEMPLATES = [
             { 
                 id: "template-01", 
                 name: "About You", 
                 asset: "template-1.png", 
                 totalSlots: 3, 
                 slots: [
-                    [130, 90, 940, 530],   // Slot 1 (Atas - Rasio 16:9)
-                    [130, 665, 940, 530],  // Slot 2 (Tengah - Rasio 16:9)
-                    [130, 1240, 940, 530]  // Slot 3 (Bawah - Rasio 16:9)
+                    [130, 75, 940, 530],   // Slot 1 (Atas - sudah dinaikkan dikit)
+                    [130, 640, 940, 530],  // Slot 2 (Tengah)
+                    [130, 1190, 940, 530]  // Slot 3 (Bawah)
                 ] 
             },
             { 
@@ -122,7 +122,7 @@
             { 
                 id: "template-03", 
                 name: "King Barca", 
-                asset: "template-33.png", 
+                asset: "template-3.png", 
                 totalSlots: 4, 
                 slots: [
                     [95, 105, 480, 480],   
@@ -144,6 +144,7 @@
                 ] 
             }
         ];
+
 
         let selectedTemplate = null;
         let currentSlotIndex = 0;
