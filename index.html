@@ -6,29 +6,68 @@
     <title>Amelia Birthday Photobooth</title>
     <!-- Tailwind CSS untuk Styling Visual -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@600;700&family=Satoshi:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Poppins', sans-serif; background-color: #fff0f5; }
-        .font-heading { font-family: 'Anton', sans-serif; letter-spacing: 1px; }
+        body { 
+            font-family: 'Satoshi', sans-serif, system-ui, -apple-system; 
+            background-color: #d9dbdf; 
+            color: #0b0d2a;
+        }
+        .font-heading { 
+            font-family: 'Clash Display', sans-serif, system-ui, -apple-system; 
+            letter-spacing: -0.02em; 
+        }
+        /* Custom Beehiiv-inspired styling helpers */
+        .beehiiv-card {
+            background-color: #ffffff;
+            border: 2px solid #0b0d2a;
+            box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .beehiiv-button {
+            background-color: #ff5ec4;
+            color: #ffffff;
+            border: 2px solid #0b0d2a;
+            box-shadow: 2px 2px 0px #0b0d2a;
+            transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .beehiiv-button:hover {
+            transform: translate(-1px, -1px);
+            box-shadow: 3px 3px 0px #0b0d2a;
+        }
+        .beehiiv-button:active {
+            transform: translate(1px, 1px);
+            box-shadow: 1px 1px 0px #0b0d2a;
+        }
+        .beehiiv-secondary-btn {
+            background-color: #f092dd;
+            color: #0b0d2a;
+            border: 2px solid #0b0d2a;
+            box-shadow: 2px 2px 0px #0b0d2a;
+            transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .beehiiv-secondary-btn:hover {
+            transform: translate(-1px, -1px);
+            box-shadow: 3px 3px 0px #0b0d2a;
+        }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-center p-4 text-gray-800">
+<body class="min-h-screen flex flex-col items-center justify-center p-4">
 
-    <div id="app" class="w-full max-w-md bg-white rounded-3xl shadow-2xl overflow-hidden border-4 border-pink-200 relative min-h-[650px] flex flex-col">
+    <div id="app" class="w-full max-w-md beehiiv-card rounded-2xl overflow-hidden relative min-h-[650px] flex flex-col">
 
         <!-- ================= 1. LANDING PAGE ================= -->
         <div id="page-landing" class="flex flex-col items-center justify-between p-6 h-full flex-grow text-center">
             <div class="mt-8">
-                <span class="bg-pink-100 text-pink-600 text-xs font-bold px-3 py-1 rounded-full uppercase">✨Only For U</span>
-                <h1 class="font-heading text-4xl text-pink-600 mt-4">READY AMELIA?</h1>
-                <p class="text-sm text-gray-500 mt-2">let's capture your majestic eyes!</p>
+                <span class="bg-[#b3b8f0] text-[#0b0d2a] text-xs font-bold px-3 py-1 rounded-md border border-[#0b0d2a] uppercase tracking-wider">✨ Only For U</span>
+                <h1 class="font-heading text-4xl font-bold text-[#0b0d2a] mt-4">READY AMELIA?</h1>
+                <p class="text-sm text-gray-600 mt-2 font-medium">let's capture your majestic eyes!</p>
             </div>
             <div class="my-6 relative w-full flex justify-center">
-                <div class="w-64 h-64 bg-pink-50 rounded-2xl border-4 border-dashed border-pink-300 flex items-center justify-center">
+                <div class="w-64 h-64 bg-[#f092dd]/20 rounded-xl border-2 border-dashed border-[#0b0d2a] flex items-center justify-center">
                     <span class="text-6xl animate-bounce">📸</span>
                 </div>
             </div>
-            <button onclick="goToPage('page-templates')" class="w-full py-4 bg-pink-500 hover:bg-pink-600 text-white font-heading text-xl rounded-full shadow-lg mb-4 cursor-pointer">
+            <button onclick="goToPage('page-templates')" class="w-full py-4 beehiiv-button font-heading text-lg font-bold rounded-xl cursor-pointer">
                 START
             </button>
         </div>
@@ -36,8 +75,8 @@
         <!-- ================= 2. TEMPLATE SELECTION ================= -->
         <div id="page-templates" class="hidden flex flex-col p-6 h-full flex-grow">
             <div class="flex items-center justify-between mb-4">
-                <button onclick="goToPage('page-landing')" class="text-pink-500 font-bold text-sm">← Back</button>
-                <h2 class="font-heading text-2xl text-pink-600">CHOOSE TEMPLATE</h2>
+                <button onclick="goToPage('page-landing')" class="text-[#0b0d2a] font-bold text-sm bg-gray-100 px-3 py-1.5 rounded-lg border border-[#0b0d2a] hover:bg-gray-200 transition">← Back</button>
+                <h2 class="font-heading text-xl font-bold text-[#0b0d2a]">CHOOSE TEMPLATE</h2>
                 <div class="w-8"></div>
             </div>
             <div class="grid grid-cols-2 gap-3 overflow-y-auto max-h-[420px] pr-1 pb-4" id="template-grid"></div>
@@ -46,24 +85,24 @@
         <!-- ================= 3. PHOTOBOOTH ================= -->
         <div id="page-booth" class="hidden flex flex-col p-4 h-full flex-grow justify-between">
             <div class="flex justify-between items-center mb-2">
-                <button onclick="confirmChangeTemplate()" class="text-xs bg-gray-100 px-3 py-1.5 rounded-full font-semibold text-gray-600">Change Template</button>
-                <span id="progress-indicator" class="text-xs font-bold bg-pink-100 text-pink-600 px-3 py-1.5 rounded-full">Photo 1 / 4</span>
-                <button onclick="toggleCameraFacing()" class="text-xs bg-gray-100 px-3 py-1.5 rounded-full font-semibold text-gray-600">🔄 Flip</button>
+                <button onclick="confirmChangeTemplate()" class="text-xs bg-gray-100 px-3 py-1.5 rounded-lg border border-[#0b0d2a] font-semibold text-[#0b0d2a] hover:bg-gray-200 transition">Change Template</button>
+                <span id="progress-indicator" class="text-xs font-bold bg-[#b3b8f0] text-[#0b0d2a] border border-[#0b0d2a] px-3 py-1 rounded-md">Photo 1 / 4</span>
+                <button onclick="toggleCameraFacing()" class="text-xs bg-gray-100 px-3 py-1.5 rounded-lg border border-[#0b0d2a] font-semibold text-[#0b0d2a] hover:bg-gray-200 transition">🔄 Flip</button>
             </div>
 
-            <div class="relative w-full aspect-[3/4] bg-black rounded-2xl overflow-hidden shadow-md flex items-center justify-center">
+            <div class="relative w-full aspect-[3/4] bg-black rounded-xl overflow-hidden border-2 border-[#0b0d2a] shadow-inner flex items-center justify-center">
                 <video id="webcam" autoplay playsinline muted class="w-full h-full object-cover transform -scale-x-100"></video>
-                <div id="countdown-overlay" class="absolute inset-0 bg-black/40 flex items-center justify-center text-white font-heading text-7xl hidden">3</div>
+                <div id="countdown-overlay" class="absolute inset-0 bg-[#0b0d2a]/60 backdrop-blur-xs flex items-center justify-center text-white font-heading text-7xl font-bold hidden">3</div>
             </div>
 
             <div class="flex gap-2 overflow-x-auto py-2" id="slot-thumbnails"></div>
 
             <div class="grid grid-cols-2 gap-3 mt-2">
-                <label class="flex items-center justify-center py-3 bg-white border-2 border-pink-300 text-pink-600 font-bold text-sm rounded-2xl shadow-sm cursor-pointer hover:bg-pink-50">
+                <label class="flex items-center justify-center py-3 bg-white border-2 border-[#0b0d2a] text-[#0b0d2a] font-bold text-sm rounded-xl shadow-[2px_2px_0px_#0b0d2a] cursor-pointer hover:bg-gray-50 transition">
                     📂 Upload Photo
                     <input type="file" accept="image/*" class="hidden" onchange="handleFileUpload(event)">
                 </label>
-                <button onclick="startCountdown()" class="py-3 bg-pink-500 hover:bg-pink-600 text-white font-bold text-sm rounded-2xl shadow-md flex items-center justify-center gap-1 cursor-pointer">
+                <button onclick="startCountdown()" class="py-3 beehiiv-button font-bold text-sm rounded-xl flex items-center justify-center gap-1 cursor-pointer">
                     📸 Capture
                 </button>
             </div>
@@ -72,19 +111,19 @@
         <!-- ================= 4. RESULT PAGE ================= -->
         <div id="page-result" class="hidden flex flex-col p-6 h-full flex-grow items-center justify-between text-center overflow-y-auto">
             <div>
-                <h2 class="font-heading text-3xl text-pink-600 mb-1">COMPLETE! </h2>
-                <p class="text-xs text-gray-400">Your photo is ready to download. </p>
+                <h2 class="font-heading text-3xl font-bold text-[#0b0d2a] mb-1">COMPLETE!</h2>
+                <p class="text-xs text-gray-600 font-medium">Your photo is ready to download.</p>
             </div>
 
-            <div class="w-64 bg-white p-2 rounded-2xl shadow-lg border-2 border-pink-200 my-2">
-                <img id="final-result-img" class="w-full rounded-xl object-contain" alt="Final Result">
+            <div class="w-64 bg-white p-2 rounded-xl border-2 border-[#0b0d2a] shadow-[4px_4px_0px_#0b0d2a] my-2">
+                <img id="final-result-img" class="w-full rounded-lg object-contain" alt="Final Result">
             </div>
 
             <div class="flex flex-col gap-2.5 w-full mt-4">
                 <a id="download-btn" download="photobooth-result.png" class="w-full">
-                    <button class="w-full py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-full shadow-md cursor-pointer">💾DOWNLOAD </button>
+                    <button class="w-full py-3 beehiiv-button font-bold rounded-xl cursor-pointer">💾 DOWNLOAD</button>
                 </a>
-                <button onclick="restartSession()" class="w-full py-3 bg-pink-100 hover:bg-pink-200 text-pink-600 font-bold rounded-full cursor-pointer">🔄RETAKE </button>
+                <button onclick="restartSession()" class="w-full py-3 beehiiv-secondary-btn font-bold rounded-xl cursor-pointer">🔄 RETAKE</button>
             </div>
         </div>
 
@@ -95,7 +134,7 @@
 
     <script>
         // Konfigurasi 4 Template Baru Sesuai Lampiranmu
-                      const TEMPLATES = [
+        const TEMPLATES = [
             { 
                 id: "template-01", 
                 name: "About You", 
@@ -143,18 +182,18 @@
                     [580, 820, 600, 600]    
                 ] 
             }, 
-                          { 
-    id: "template-05", 
-    name: "18",   
-    asset: "template-5.png",          
-    totalSlots: 3,                    // Jumlah kotak/slot foto di template ini
-    slots: [
-        [130, 75, 940, 530],   
-        [130, 640, 940, 530],  
-        [130, 1190, 940, 530]          // Koordinat Slot 2 [X, Y, Lebar, Tinggi]
-    ] 
-},
-{ 
+            { 
+                id: "template-05", 
+                name: "18",   
+                asset: "template-5.png",          
+                totalSlots: 3,                    
+                slots: [
+                    [130, 75, 940, 530],   
+                    [130, 640, 940, 530],  
+                    [130, 1190, 940, 530]          
+                ] 
+            },
+            { 
                 id: "template-06", 
                 name: "Tangled", 
                 asset: "template-6.png", 
@@ -166,7 +205,7 @@
                     [580, 800, 600, 600] 
                 ] 
             },
-                          { 
+            { 
                 id: "template-07", 
                 name: "Zootopia", 
                 asset: "template-7.png", 
@@ -178,19 +217,17 @@
                     [580, 800, 600, 600] 
                 ] 
             },
-                          { 
-    id: "template-08", 
-    name: "Happy Bday",   
-    asset: "template-8.png",          
-    totalSlots: 2,                    // Jumlah kotak/slot foto di template ini
-    slots: [
-        [120, 75, 960, 540],   
-        [570, 1150, 550, 550]          // Koordinat Slot 2 [X, Y, Lebar, Tinggi]
-    ] 
-},
+            { 
+                id: "template-08", 
+                name: "Happy Bday",   
+                asset: "template-8.png",          
+                totalSlots: 2,                    
+                slots: [
+                    [120, 75, 960, 540],   
+                    [570, 1150, 550, 550]          
+                ] 
+            },
         ];
-
-
 
         let selectedTemplate = null;
         let currentSlotIndex = 0;
@@ -215,14 +252,14 @@
             grid.innerHTML = '';
             TEMPLATES.forEach(tpl => {
                 const card = document.createElement('div');
-                card.className = "bg-pink-50 border-2 border-pink-200 rounded-2xl p-3 flex flex-col items-center cursor-pointer hover:border-pink-500 transition";
+                card.className = "bg-white border-2 border-[#0b0d2a] rounded-xl p-3 flex flex-col items-center cursor-pointer hover:translate-y-[-2px] hover:shadow-[2px_2px_0px_#0b0d2a] transition-all";
                 card.onclick = () => selectTemplate(tpl);
                 card.innerHTML = `
-                    <div class="w-full h-32 bg-white rounded-xl overflow-hidden flex items-center justify-center mb-2">
+                    <div class="w-full h-32 bg-[#d9dbdf]/30 rounded-lg overflow-hidden border border-[#0b0d2a]/20 flex items-center justify-center mb-2">
                         <img src="${tpl.asset}" class="h-full object-contain" alt="${tpl.name}">
                     </div>
-                    <span class="font-bold text-xs text-gray-700">${tpl.name}</span>
-                    <span class="text-[10px] text-pink-500 font-semibold">${tpl.totalSlots} Slots</span>
+                    <span class="font-bold text-xs text-[#0b0d2a]">${tpl.name}</span>
+                    <span class="text-[10px] text-pink-600 font-semibold">${tpl.totalSlots} Slots</span>
                 `;
                 grid.appendChild(card);
             });
@@ -322,7 +359,7 @@
             thumbContainer.innerHTML = '';
             for (let i = 0; i < selectedTemplate.totalSlots; i++) {
                 const thumb = document.createElement('div');
-                thumb.className = `w-12 h-16 rounded-lg border-2 overflow-hidden bg-gray-200 flex items-center justify-center text-xs font-bold ${i < currentSlotIndex ? 'border-pink-500' : 'border-dashed border-gray-400'}`;
+                thumb.className = `w-12 h-16 rounded-lg border-2 border-[#0b0d2a] overflow-hidden bg-gray-100 flex items-center justify-center text-xs font-bold ${i < currentSlotIndex ? 'opacity-100 ring-2 ring-[#ff5ec4]' : 'border-dashed opacity-60'}`;
                 if (capturedPhotos[i]) thumb.innerHTML = `<img src="${capturedPhotos[i]}" class="w-full h-full object-cover">`;
                 else thumb.innerText = `#${i+1}`;
                 thumbContainer.appendChild(thumb);
