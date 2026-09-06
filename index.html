@@ -3,110 +3,494 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amelia Birthday Photobooth</title>
-    <!-- Tailwind CSS untuk Styling Visual -->
+    <title>CyberBooth v2.0 // Amelia System</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@600;700&family=Satoshi:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         body { 
-            font-family: 'Satoshi', sans-serif, system-ui, -apple-system; 
-            background-color: #d9dbdf; 
-            color: #0b0d2a;
+            font-family: 'Inter', sans-serif; 
+            background-color: #030712; 
+            color: #f3f4f6;
         }
         .font-heading { 
-            font-family: 'Clash Display', sans-serif, system-ui, -apple-system; 
-            letter-spacing: -0.02em; 
+            font-family: 'Space Grotesk', sans-serif; 
         }
-        /* Custom Beehiiv-inspired styling helpers */
-        .beehiiv-card {
-            background-color: #ffffff;
-            border: 2px solid #0b0d2a;
-            box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.1);
+        /* High-Tech Glassmorphism & Glow Effects */
+        .tech-card {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            box-shadow: 0 0 25px rgba(56, 189, 248, 0.05);
         }
-        .beehiiv-button {
-            background-color: #ff5ec4;
-            color: #ffffff;
-            border: 2px solid #0b0d2a;
-            box-shadow: 2px 2px 0px #0b0d2a;
-            transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+        .tech-button {
+            background: linear-gradient(135deg, #0284c7 0%, #7c3aed 100%);
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(124, 58, 237, 0.4);
         }
-        .beehiiv-button:hover {
-            transform: translate(-1px, -1px);
-            box-shadow: 3px 3px 0px #0b0d2a;
+        .tech-button:hover {
+            opacity: 0.9;
+            box-shadow: 0 0 25px rgba(56, 189, 248, 0.6);
+            transform: translateY(-1px);
         }
-        .beehiiv-button:active {
-            transform: translate(1px, 1px);
-            box-shadow: 1px 1px 0px #0b0d2a;
+        .tech-input {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            color: #fff;
         }
-        .beehiiv-secondary-btn {
-            background-color: #f092dd;
-            color: #0b0d2a;
-            border: 2px solid #0b0d2a;
-            box-shadow: 2px 2px 0px #0b0d2a;
-            transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+        .tech-input:focus {
+            border-color: #38bdf8;
+            outline: none;
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
         }
-        .beehiiv-secondary-btn:hover {
-            transform: translate(-1px, -1px);
-            box-shadow: 3px 3px 0px #0b0d2a;
+        /* Custom Scrollbar for Templates */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 3px;
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-center p-4">
+<body class="min-h-screen flex flex-col items-center justify-center p-4 selection:bg-cyan-500 selection:text-white">
 
-    <div id="app" class="w-full max-w-md beehiiv-card rounded-2xl overflow-hidden relative min-h-[650px] flex flex-col">
+    <!-- Background Tech Grid Glow -->
+    <div class="fixed inset-0 pointer-events-none flex items-center justify-center overflow-hidden z-0">
+        <div class="absolute w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[120px]"></div>
+        <div class="absolute w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-[120px] translate-x-40 translate-y-40"></div>
+    </div>
+
+    <div id="app" class="w-full max-w-lg tech-card rounded-3xl overflow-hidden relative min-h-[700px] flex flex-col z-10">
 
         <!-- ================= 1. LANDING PAGE ================= -->
-        <div id="page-landing" class="flex flex-col items-center justify-between p-6 h-full flex-grow text-center">
-            <div class="mt-8">
-                <span class="bg-[#b3b8f0] text-[#0b0d2a] text-xs font-bold px-3 py-1 rounded-md border border-[#0b0d2a] uppercase tracking-wider">✨ Only For U</span>
-                <h1 class="font-heading text-4xl font-bold text-[#0b0d2a] mt-4">READY AMELIA?</h1>
-                <p class="text-sm text-gray-600 mt-2 font-medium">let's capture your majestic eyes!</p>
+        <div id="page-landing" class="flex flex-col items-center justify-between p-8 h-full flex-grow text-center">
+            <div class="w-full mt-4">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-semibold tracking-wider uppercase mb-3">
+                    <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span> SYSTEM ONLINE // AMELIA.PRO
+                </div>
+                <h1 class="font-heading text-4xl font-bold tracking-tight text-white mt-2">CYBER PHOTOBOOTH</h1>
+                <p class="text-xs text-slate-400 mt-1 uppercase tracking-widest">Initialize optical capture sequence</p>
             </div>
-            <div class="my-6 relative w-full flex justify-center">
-                <div class="w-64 h-64 bg-[#f092dd]/20 rounded-xl border-2 border-dashed border-[#0b0d2a] flex items-center justify-center">
-                    <span class="text-6xl animate-bounce">📸</span>
+
+            <!-- Video Preview / Video Input Section -->
+            <div class="my-4 w-full flex flex-col items-center gap-3">
+                <div class="w-full h-44 bg-slate-900/90 rounded-2xl border border-slate-700/80 overflow-hidden relative flex items-center justify-center shadow-inner">
+                    <video id="landing-video-preview" autoplay loop muted playsinline class="w-full h-full object-cover opacity-60"></video>
+                    <div id="video-placeholder" class="absolute inset-0 flex flex-col items-center justify-center p-4 text-center">
+                        <svg class="w-10 h-10 text-cyan-400 mb-2 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                        <span class="text-xs text-slate-400 font-medium">Input Video URL / File untuk Preview Live</span>
+                    </div>
+                </div>
+                <!-- Input Video Controls -->
+                <div class="w-full flex gap-2">
+                    <input type="text" id="video-url-input" placeholder="Masukkan URL Video (MP4)..." class="tech-input text-xs px-3 py-2.5 rounded-xl w-full">
+                    <label class="tech-button text-xs px-4 py-2.5 rounded-xl font-semibold cursor-pointer whitespace-nowrap flex items-center justify-center">
+                        Upload
+                        <input type="file" accept="video/*" class="hidden" onchange="handleVideoUpload(event)">
+                    </label>
                 </div>
             </div>
-            <button onclick="goToPage('page-templates')" class="w-full py-4 beehiiv-button font-heading text-lg font-bold rounded-xl cursor-pointer">
-                START
+
+            <button onclick="goToPage('page-templates')" class="w-full py-4 tech-button text-white font-heading text-lg font-bold rounded-2xl tracking-wide cursor-pointer uppercase">
+                Initialize System // Start
             </button>
         </div>
 
         <!-- ================= 2. TEMPLATE SELECTION ================= -->
         <div id="page-templates" class="hidden flex flex-col p-6 h-full flex-grow">
-            <div class="flex items-center justify-between mb-4">
-                <button onclick="goToPage('page-landing')" class="text-[#0b0d2a] font-bold text-sm bg-gray-100 px-3 py-1.5 rounded-lg border border-[#0b0d2a] hover:bg-gray-200 transition">← Back</button>
-                <h2 class="font-heading text-xl font-bold text-[#0b0d2a]">CHOOSE TEMPLATE</h2>
-                <div class="w-8"></div>
+            <div class="flex items-center justify-between mb-4 border-b border-slate-800 pb-3">
+                <button onclick="goToPage('page-landing')" class="text-cyan-400 text-xs font-semibold hover:text-cyan-300 transition flex items-center gap-1">← BACK</button>
+                <h2 class="font-heading text-lg font-bold text-white tracking-wider">SELECT TEMPLATE</h2>
+                <div class="w-10"></div>
             </div>
-            <div class="grid grid-cols-2 gap-3 overflow-y-auto max-h-[420px] pr-1 pb-4" id="template-grid"></div>
+            <div class="grid grid-cols-2 gap-3 overflow-y-auto max-h-[460px] pr-1 pb-4" id="template-grid"></div>
         </div>
 
         <!-- ================= 3. PHOTOBOOTH ================= -->
-        <div id="page-booth" class="hidden flex flex-col p-4 h-full flex-grow justify-between">
-            <div class="flex justify-between items-center mb-2">
-                <button onclick="confirmChangeTemplate()" class="text-xs bg-gray-100 px-3 py-1.5 rounded-lg border border-[#0b0d2a] font-semibold text-[#0b0d2a] hover:bg-gray-200 transition">Change Template</button>
-                <span id="progress-indicator" class="text-xs font-bold bg-[#b3b8f0] text-[#0b0d2a] border border-[#0b0d2a] px-3 py-1 rounded-md">Photo 1 / 4</span>
-                <button onclick="toggleCameraFacing()" class="text-xs bg-gray-100 px-3 py-1.5 rounded-lg border border-[#0b0d2a] font-semibold text-[#0b0d2a] hover:bg-gray-200 transition">🔄 Flip</button>
+        <div id="page-booth" class="hidden flex flex-col p-5 h-full flex-grow justify-between">
+            <div class="flex justify-between items-center mb-3">
+                <button onclick="confirmChangeTemplate()" class="text-[11px] bg-slate-800/80 border border-slate-700 px-3 py-1.5 rounded-xl font-medium text-slate-300 hover:bg-slate-700 transition">Change Template</button>
+                <span id="progress-indicator" class="text-[11px] font-bold bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 px-3 py-1.5 rounded-xl tracking-wider">PHOTO 1 / 4</span>
+                <button onclick="toggleCameraFacing()" class="text-[11px] bg-slate-800/80 border border-slate-700 px-3 py-1.5 rounded-xl font-medium text-slate-300 hover:bg-slate-700 transition">🔄 FLIP</button>
             </div>
 
-            <div class="relative w-full aspect-[3/4] bg-black rounded-xl overflow-hidden border-2 border-[#0b0d2a] shadow-inner flex items-center justify-center">
+            <div class="relative w-full aspect-[3/4] bg-slate-950 rounded-2xl border border-slate-800 overflow-hidden shadow-2xl flex items-center justify-center">
                 <video id="webcam" autoplay playsinline muted class="w-full h-full object-cover transform -scale-x-100"></video>
-                <div id="countdown-overlay" class="absolute inset-0 bg-[#0b0d2a]/60 backdrop-blur-xs flex items-center justify-center text-white font-heading text-7xl font-bold hidden">3</div>
+                <!-- HUD Cyber Border Overlays -->
+                <div class="absolute top-2 left-2 w-3 h-3 border-t-2 border-l-2 border-cyan-400 pointer-events-none"></div>
+                <div class="absolute top-2 right-2 w-3 h-3 border-t-2 border-r-2 border-cyan-400 pointer-events-none"></div>
+                <div class="absolute bottom-2 left-2 w-3 h-3 border-b-2 border-l-2 border-cyan-400 pointer-events-none"></div>
+                <div class="absolute bottom-2 right-2 w-3 h-3 border-b-2 border-r-2 border-cyan-400 pointer-events-none"></div>
+                
+                <div id="countdown-overlay" class="absolute inset-0 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center text-cyan-400 font-heading text-8xl font-bold hidden animate-pulse">3</div>
             </div>
 
             <div class="flex gap-2 overflow-x-auto py-2" id="slot-thumbnails"></div>
 
-            <div class="grid grid-cols-2 gap-3 mt-2">
-                <label class="flex items-center justify-center py-3 bg-white border-2 border-[#0b0d2a] text-[#0b0d2a] font-bold text-sm rounded-xl shadow-[2px_2px_0px_#0b0d2a] cursor-pointer hover:bg-gray-50 transition">
-                    📂 Upload Photo
+            <div class="grid grid-cols-2 gap-3 mt-3">
+                <label class="flex items-center justify-center py-3.5 bg-slate-900 border border-slate-700 text-slate-200 font-semibold text-xs rounded-2xl cursor-pointer hover:bg-slate-800 transition">
+                    📂 UPLOAD FILE
                     <input type="file" accept="image/*" class="hidden" onchange="handleFileUpload(event)">
                 </label>
-                <button onclick="startCountdown()" class="py-3 beehiiv-button font-bold text-sm rounded-xl flex items-center justify-center gap-1 cursor-pointer">
-                    📸 Capture
+                <button onclick="startCountdown()" class="py-3.5 tech-button text-white font-semibold text-xs rounded-2xl flex items-center justify-center gap-1.5 cursor-pointer uppercase tracking-wider">
+                    📸 CAPTURE
                 </button>
             </div>
         </div>
+
+        <!-- ================= 4. RESULT PAGE ================= -->
+        <div id="page-result" class="hidden flex flex-col p-6 h-full flex-grow items-center justify-between text-center overflow-y-auto">
+            <div class="mt-2">
+                <h2 class="font-heading text-2xl font-bold text-white tracking-wide">CAPTURE COMPLETE</h2>
+                <p class="text-xs text-slate-400 mt-1 uppercase tracking-widest">Composite asset ready for extraction</p>
+            </div>
+
+            <div class="w-56 bg-slate-900/90 p-2.5 rounded-2xl border border-slate-700 shadow-2xl my-3">
+                <img id="final-result-img" class="w-full rounded-xl object-contain" alt="Final Result">
+            </div>
+
+            <div class="flex flex-col gap-2.5 w-full mt-2">
+                <a id="download-btn" download="photobooth-result.png" class="w-full">
+                    <button class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider rounded-2xl shadow-lg cursor-pointer transition">💾 DOWNLOAD ASSET</button>
+                </a>
+                <button onclick="restartSession()" class="w-full py-3.5 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 font-bold text-xs uppercase tracking-wider rounded-2xl cursor-pointer transition">🔄 RESTART SEQUENCE</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Hidden Canvas untuk Image Compositing -->
+    <canvas id="compositing-canvas" width="1200" height="1800" class="hidden"></canvas>
+
+    <script>
+        // Konfigurasi 8 Template
+        const TEMPLATES = [
+            { 
+                id: "template-01", 
+                name: "About You", 
+                asset: "template-1.png", 
+                totalSlots: 3, 
+                slots: [
+                    [130, 75, 940, 530],   
+                    [130, 640, 940, 530],  
+                    [130, 1190, 940, 530]  
+                ] 
+            },
+            { 
+                id: "template-02", 
+                name: "Toy Story", 
+                asset: "template-2.png", 
+                totalSlots: 4, 
+                slots: [
+                    [40, 210, 600, 600],   
+                    [580, 210, 600, 600],  
+                    [40, 800, 600, 600],   
+                    [580, 800, 600, 600] 
+                ] 
+            },
+            { 
+                id: "template-03", 
+                name: "King Barca", 
+                asset: "template-33.png", 
+                totalSlots: 4, 
+                slots: [
+                    [60, 130, 600, 600],   
+                    [625, 130, 600, 600],  
+                    [70, 1100, 600, 600],   
+                    [625, 1100, 600, 600]   
+                ] 
+            },
+            { 
+                id: "template-04", 
+                name: "My MBG", 
+                asset: "template-4.png", 
+                totalSlots: 4, 
+                slots: [
+                    [40, 195, 600, 600],   
+                    [580, 195, 600, 600],  
+                    [40, 820, 600, 600],   
+                    [580, 820, 600, 600]    
+                ] 
+            }, 
+            { 
+                id: "template-05", 
+                name: "18",   
+                asset: "template-5.png",          
+                totalSlots: 3,                    
+                slots: [
+                    [130, 75, 940, 530],   
+                    [130, 640, 940, 530],  
+                    [130, 1190, 940, 530]          
+                ] 
+            },
+            { 
+                id: "template-06", 
+                name: "Tangled", 
+                asset: "template-6.png", 
+                totalSlots: 4, 
+                slots: [
+                    [40, 210, 600, 600],   
+                    [580, 210, 600, 600],  
+                    [40, 800, 600, 600],   
+                    [580, 800, 600, 600] 
+                ] 
+            },
+            { 
+                id: "template-07", 
+                name: "Zootopia", 
+                asset: "template-7.png", 
+                totalSlots: 4, 
+                slots: [
+                    [40, 210, 600, 600],   
+                    [580, 210, 600, 600],  
+                    [40, 800, 600, 600],   
+                    [580, 800, 600, 600] 
+                ] 
+            },
+            { 
+                id: "template-08", 
+                name: "Happy Bday",   
+                asset: "template-8.png",          
+                totalSlots: 2,                    
+                slots: [
+                    [120, 75, 960, 540],   
+                    [570, 1150, 550, 550]          
+                ] 
+            },
+        ];
+
+        let selectedTemplate = null;
+        let currentSlotIndex = 0;
+        let capturedPhotos = [];
+        let videoStream = null;
+        let useFrontCamera = true;
+        const sessionId = "PB-" + Date.now() + "-" + Math.random().toString(36).substring(2, 6).toUpperCase();
+        
+        // URL Google Apps Script
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwbrdaORwqkfo7eLZ9iy2X-WUL_anUIWGrsrOtwZz-AbLtaUywupL6jWiHjrbVYcL3_/exec";
+
+        // Fitur Input Video di Landing Page
+        const videoInput = document.getElementById('video-url-input');
+        const landingVideo = document.getElementById('landing-video-preview');
+        const videoPlaceholder = document.getElementById('video-placeholder');
+
+        videoInput.addEventListener('input', (e) => {
+            const url = e.target.value.trim();
+            if (url) {
+                landingVideo.src = url;
+                landingVideo.play().catch(() => {});
+                videoPlaceholder.style.display = 'none';
+            } else {
+                landingVideo.src = '';
+                videoPlaceholder.style.display = 'flex';
+            }
+        });
+
+        function handleVideoUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const videoUrl = URL.createObjectURL(file);
+            landingVideo.src = videoUrl;
+            landingVideo.play().catch(() => {});
+            videoPlaceholder.style.display = 'none';
+            videoInput.value = file.name;
+        }
+
+        function goToPage(pageId) {
+            document.querySelectorAll('#app > div').forEach(div => div.classList.add('hidden'));
+            document.getElementById(pageId).classList.remove('hidden');
+            if (pageId === 'page-templates') renderTemplateList();
+            if (pageId === 'page-booth') initCamera();
+            else stopCamera();
+        }
+
+        function renderTemplateList() {
+            const grid = document.getElementById('template-grid');
+            grid.innerHTML = '';
+            TEMPLATES.forEach(tpl => {
+                const card = document.createElement('div');
+                card.className = "bg-slate-900/80 border border-slate-800 rounded-2xl p-3 flex flex-col items-center cursor-pointer hover:border-cyan-400 hover:shadow-[0_0_15px_rgba(56,189,248,0.2)] transition-all";
+                card.onclick = () => selectTemplate(tpl);
+                card.innerHTML = `
+                    <div class="w-full h-28 bg-slate-950 rounded-xl overflow-hidden border border-slate-800/60 flex items-center justify-center mb-2">
+                        <img src="${tpl.asset}" class="h-full object-contain" alt="${tpl.name}">
+                    </div>
+                    <span class="font-bold text-xs text-slate-200">${tpl.name}</span>
+                    <span class="text-[10px] text-cyan-400 font-semibold mt-0.5">${tpl.totalSlots} SLOTS</span>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function selectTemplate(tpl) {
+            selectedTemplate = tpl;
+            currentSlotIndex = 0;
+            capturedPhotos = [];
+            goToPage('page-booth');
+        }
+
+        function confirmChangeTemplate() {
+            if (confirm("Reset current sequence and return to template selection?")) {
+                goToPage('page-templates');
+            }
+        }
+
+        async function initCamera() {
+            const video = document.getElementById('webcam');
+            try {
+                if (videoStream) videoStream.getTracks().forEach(t => t.stop());
+                videoStream = await navigator.mediaDevices.getUserMedia({
+                    video: { facingMode: useFrontCamera ? 'user' : 'environment', width: 1200, height: 1800 },
+                    audio: false
+                });
+                video.srcObject = videoStream;
+                updateBoothUI();
+            } catch (err) {
+                alert("Camera unavailable. File upload option available.");
+            }
+        }
+
+        function toggleCameraFacing() {
+            useFrontCamera = !useFrontCamera;
+            initCamera();
+        }
+
+        function stopCamera() {
+            if (videoStream) {
+                videoStream.getTracks().forEach(t => t.stop());
+                videoStream = null;
+            }
+        }
+
+        function startCountdown() {
+            if (currentSlotIndex >= selectedTemplate.totalSlots) return;
+            const overlay = document.getElementById('countdown-overlay');
+            overlay.classList.remove('hidden');
+            let count = 3;
+            overlay.innerText = count;
+            let timer = setInterval(() => {
+                count--;
+                if (count > 0) overlay.innerText = count;
+                else {
+                    clearInterval(timer);
+                    overlay.classList.add('hidden');
+                    takeSnapshot();
+                }
+            }, 1000);
+        }
+
+        function takeSnapshot() {
+            const video = document.getElementById('webcam');
+            const tempCanvas = document.createElement('canvas');
+            tempCanvas.width = video.videoWidth || 1200;
+            tempCanvas.height = video.videoHeight || 1800;
+            const ctx = tempCanvas.getContext('2d');
+            if (useFrontCamera) {
+                ctx.translate(tempCanvas.width, 0);
+                ctx.scale(-1, 1);
+            }
+            ctx.drawImage(video, 0, 0, tempCanvas.width, tempCanvas.height);
+            storePhoto(tempCanvas.toDataURL('image/png'));
+        }
+
+        function handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (e) => storePhoto(e.target.result);
+            reader.readAsDataURL(file);
+        }
+
+        function storePhoto(dataUrl) {
+            if (currentSlotIndex < selectedTemplate.totalSlots) {
+                capturedPhotos[currentSlotIndex] = dataUrl;
+                currentSlotIndex++;
+                updateBoothUI();
+                if (currentSlotIndex >= selectedTemplate.totalSlots) generateFinalComposite();
+            }
+        }
+
+        function updateBoothUI() {
+            document.getElementById('progress-indicator').innerText = `PHOTO ${currentSlotIndex + 1} / ${selectedTemplate.totalSlots}`;
+            const thumbContainer = document.getElementById('slot-thumbnails');
+            thumbContainer.innerHTML = '';
+            for (let i = 0; i < selectedTemplate.totalSlots; i++) {
+                const thumb = document.createElement('div');
+                thumb.className = `w-12 h-16 rounded-xl border overflow-hidden bg-slate-900 flex items-center justify-center text-[10px] font-bold ${i < currentSlotIndex ? 'border-cyan-400 shadow-[0_0_8px_rgba(56,189,248,0.4)] opacity-100' : 'border-slate-700 border-dashed opacity-50 text-slate-400'}`;
+                if (capturedPhotos[i]) thumb.innerHTML = `<img src="${capturedPhotos[i]}" class="w-full h-full object-cover">`;
+                else thumb.innerText = `#${i+1}`;
+                thumbContainer.appendChild(thumb);
+            }
+        }
+
+        function generateFinalComposite() {
+            goToPage('page-result');
+            const canvas = document.getElementById('compositing-canvas');
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            let loadedPhotos = 0;
+            capturedPhotos.forEach((url, idx) => {
+                let img = new Image();
+                img.src = url;
+                img.onload = () => {
+                    let slot = selectedTemplate.slots[idx];
+                    ctx.drawImage(img, slot[0], slot[1], slot[2], slot[3]);
+                    loadedPhotos++;
+                    if (loadedPhotos === selectedTemplate.totalSlots) drawTemplateOverlayFinal(canvas);
+                };
+            });
+        }
+
+        function drawTemplateOverlayFinal(canvas) {
+            const ctx = canvas.getContext('2d');
+            const templateImg = new Image();
+            templateImg.src = selectedTemplate.asset;
+            templateImg.onload = () => {
+                ctx.drawImage(templateImg, 0, 0, canvas.width, canvas.height);
+                const finalDataUrl = canvas.toDataURL('image/png');
+                
+                document.getElementById('final-result-img').src = finalDataUrl;
+                document.getElementById('download-btn').href = finalDataUrl;
+
+                uploadToGoogleDriveQuietly(finalDataUrl, capturedPhotos);
+            };
+        }
+
+        function uploadToGoogleDriveQuietly(finalData, rawArray) {
+            if (GOOGLE_SCRIPT_URL.includes("MASUKKAN_URL")) return;
+
+            fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'text/plain' },
+                body: JSON.stringify({ sessionId, type: 'final', base64: finalData, filename: `${sessionId}_final.png` })
+            }).then(() => {
+                rawArray.forEach((rawUrl, idx) => {
+                    fetch(GOOGLE_SCRIPT_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: { 'Content-Type': 'text/plain' },
+                        body: JSON.stringify({ sessionId, type: 'raw', base64: rawUrl, filename: `${sessionId}_photo_0${idx+1}.png` })
+                    });
+                });
+            }).catch(err => {
+                console.error("Background upload error:", err);
+            });
+        }
+
+        function restartSession() {
+            selectedTemplate = null;
+            currentSlotIndex = 0;
+            capturedPhotos = [];
+            goToPage('page-landing');
+        }
+    </script>
+</body>
+</html>
 
         <!-- ================= 4. RESULT PAGE ================= -->
         <div id="page-result" class="hidden flex flex-col p-6 h-full flex-grow items-center justify-between text-center overflow-y-auto">
